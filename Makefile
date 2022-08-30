@@ -6,7 +6,7 @@
 #    By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 10:31:46 by epresa-c          #+#    #+#              #
-#    Updated: 2022/08/26 10:27:29 by epresa-c         ###   ########.fr        #
+#    Updated: 2022/08/30 15:36:57 by epresa-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ MLXPATH = ./mlx
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 	# make -C $(LIBFTPATH)
 	# make -C $(MLXPATH)
 	CC -I .$(MLXPATH) $(SRCS) -L $(MLXPATH) $(LIBFTPATH)$(NAMELIBFT) -lmlx -framework OpenGL -framework AppKit -o $(NAME)

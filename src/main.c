@@ -6,14 +6,19 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/08/26 10:31:45 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/08/30 16:40:41 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
 
+int createRGB(int r, int g, int b)
+{
+	return (255 << 24 | r << 16 | g << 8 | b);
+}
+
 int	main(void)
 {
-	printf("Welcome to miniRT\n");
+	printf("RED = %x\n", createRGB(0, 125, 0));
 	return (0);
 }
