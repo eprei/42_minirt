@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/02 13:53:32 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/02 16:57:58 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,25 @@ typedef struct s_obj
 
 typedef struct s_scene
 {
+	int		h;
+	int		w;
 	t_cam	cam;
 	t_obj	l_amb;
 	t_obj	p_light;
 	t_obj	*obj_0;
 	int		n_objs;
 }	t_scene;
+
+typedef struct s_inter_sp
+{
+	double	a;
+	double	b;
+	double	c;
+	double	delta;
+	double	t1;
+	double	t2;
+	double	t;
+}	t_inter_sp;
 
 /* *****************************  vector_utils.c  ****************************/
 
@@ -81,4 +94,9 @@ t_vector	op_minus(const t_vector c1, const t_vector c2);
 t_vector	op_mult(double a, const t_vector c1);
 t_vector	op_div(const t_vector c1, double a);
 double		op_dot(const t_vector c1, const t_vector c2);
+double		get_norm2(t_vector c1);
+void		normalize(t_vector *c1);
+int			create_rgb(int r, int g, int v);
+double		max_v(double a);
+double		min_max(double a);
 #endif
