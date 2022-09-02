@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/08/30 16:35:50 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/02 12:06:28 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,12 @@
 # define WIDTH 1024
 # define HEIGHT 1024
 
-typedef struct s_range
-{
-	double	min;
-	double	max;
-}	t_range;
-
-typedef struct s_point
+typedef struct s_vector
 {
 	double	x;
 	double	y;
 	double	z;
-}	t_point;
+}	t_vector;
 
 typedef struct s_color
 {
@@ -54,18 +48,16 @@ typedef struct s_color
 
 typedef struct s_cam
 {
-	t_point	pos;
-	t_point	orient_x;
-	t_point	orient_y;
-	t_point	orient_z;
-	double	fov;
+	t_vector	pos;
+	t_vector	orient;
+	int			fov;
 }	t_cam;
 
 typedef struct s_obj
 {
 	int				type;
-	t_point			pos;
-	t_point			orientation;
+	t_vector		pos;
+	t_vector		orientation;
 	t_color			color;
 	double			intensity;
 	double			diameter;

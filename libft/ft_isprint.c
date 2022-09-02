@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 14:17:52 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:23 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/10/25 17:34:56 by olmartin          #+#    #+#             */
+/*   Updated: 2021/10/25 17:42:48 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isprint(int c)
 {
-	if (32 <= c && c <= 126)
+	if ((c >= 32 && c <= 126))
 		return (1);
-	else
-		return (0);
+	return (0);
 }

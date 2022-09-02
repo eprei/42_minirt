@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/27 11:06:15 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:44 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/11/01 10:56:16 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/25 09:05:25 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strchr(const char *s, int c)
 {
-	unsigned int	i;
+	int		i;
 
 	i = 0;
-	while (s[i])
+	while (s[i] != 0)
 	{
-		if (s[i] == (char) c)
-			return ((char *)s + i);
-		i++;
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		else
+			i++;
 	}
-	if (s[i] == (char) c)
-		return ((char *)s + i);
+	if (s[i] == (char)c)
+		return ((char *)&s[i]);
 	return (0);
 }

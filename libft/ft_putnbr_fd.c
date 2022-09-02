@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 17:40:55 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:31 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/10/28 10:11:46 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/15 16:43:56 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
-	else if (n >= 0 && n <= 9)
-		ft_putchar_fd((n + 48), fd);
-	else if (n < 0)
 	{
-		ft_putchar_fd(('-'), fd);
-		ft_putnbr_fd((n * (-1)), fd);
+		ft_putchar_fd('-', fd);
+		ft_putchar_fd('2', fd);
+		n = n - 2000000000;
 	}
-	else
+	if (n < 0)
 	{
-		ft_putnbr_fd((n / 10), fd);
-		ft_putnbr_fd((n % 10), fd);
+		ft_putchar_fd('-', fd);
+		n = -n;
 	}
+	if (n / 10)
+		ft_putnbr_fd(n / 10, fd);
+	ft_putchar_fd('0' + n % 10, fd);
 }

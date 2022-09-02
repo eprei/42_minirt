@@ -3,91 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 12:45:09 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:41 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/11/08 10:43:31 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/19 16:17:51 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_words(char const *s, char c)
-{
-	size_t	words;
-
-	words = 0;
-	while (*s)
-	{
-		if (*s != c)
-		{
-			words++;
-			while (*s != '\0' && *s != c)
-				s++;
-		}
-		s++;
-	}
-	return (words);
-}
+static size_t	ft_delim(char const *s, char c);
+static void		ft_cut(char **ptr, const char *s, char c, size_t nb);
+static size_t	ft_len_cut(char *s, char c, size_t *start);
 
 char	**ft_split(char const *s, char c)
 {
-	size_t		len;
-	size_t		index;
-	const char	*start;
-	char		**split;
+	size_t	nb;
+	char	**ptr;
 
-	split = (char **) malloc(((ft_words(s, c)) + 1) * sizeof(*split));
-	if (!s || split == NULL)
-		return (NULL);
-	index = 0;
-	while (*s)
-	{
-		while (*s && *s == c)
-			s++;
-		start = s;
-		len = 0;
-		while (*s && *s != c)
-		{
-			s++;
-			len++;
-		}
-		if (*(s - 1) != c)
-			split[index++] = ft_substr(start, 0, len);
-	}
-	split[index] = 0;
-	return (split);
+	if (s == 0)
+		return (0);
+	nb = ft_delim(s, c);
+	ptr = (char **)malloc(sizeof(char *) * (nb + 1));
+	if (ptr == 0)
+		return (0);
+	ft_cut(ptr, s, c, nb);
+	return (ptr);
 }
 
-/*
-
-char	**ft_free_error(char **tab)
- {
- 	unsigned int	i;
-	
-	if (!tab)
-		return (NULL);
- 	i = 0;
- 	while (tab[i])
- 	{
- 		free(tab[i]);
- 		i++;
- 	}
- 	free(tab);
- 	return (NULL);
- }
-
-	if (!s)
-		return (NULL);
-	if (!(split = (char **) malloc(((ft_words(s, c)) + 1) * sizeof(*split))))
-		return (ft_free_error(split));
-
-
-int main()
+static size_t	ft_delim(char const *s, char c)
 {
-	char	*str;
+	size_t	nb;
+	size_t	i;
 
-	str = "";
-	ft_split(str, 'c');
-	return (0);
-}*/
+	nb = 0;
+	i = 0;
+	while (s[i] != 0 && s[i] == c)
+		i++;
+	while (s[i] != 0)
+	{
+		nb++;
+		while (s[i] != 0 && s[i] != c)
+			i++;
+		while (s[i] != 0 && s[i] == c)
+			i++;
+	}
+	return (nb);
+}
+
+static void	ft_cut(char **ptr, const char *s, char c, size_t nb)
+{
+	size_t	start;
+	size_t	len;
+	size_t	i;
+	char	*s2;
+	size_t	*st;
+
+	start = 0;
+	st = &start;
+	s2 = 0;
+	i = 0;
+	while (i < nb)
+	{
+		len = ft_len_cut((char *)s, c, st);
+		s2 = ft_substr(s, start, len);
+		ptr[i] = s2;
+		*st = *st + len + 1;
+		i++;
+	}
+	ptr[i] = 0;
+}
+
+static size_t	ft_len_cut(char *s2, char c, size_t *start)
+{
+	size_t	i;
+	size_t	n;
+
+	i = *start;
+	n = 0;
+	while (s2[i] == c)
+	{
+		i++;
+		n++;
+	}
+	*start += n;
+	n = 0;
+	while (s2[i] != 0 && s2[i] != c)
+	{
+		i++;
+		n++;
+	}
+	return (n);
+}

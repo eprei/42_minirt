@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 12:44:59 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:56 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/10/27 18:00:24 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/18 13:05:31 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,60 +14,17 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	start;
-	size_t	end;
-	char	*ptr;
+	int		i;
+	int		start;
 
-	ptr = 0;
-	if (s1 != 0 && set != 0)
-	{
-		start = 0;
-		end = ft_strlen(s1);
-		while (s1[start] && ft_strchr(set, s1[start]))
-			start++;
-		while (s1[end - 1] && ft_strchr(set, s1[end - 1]) && end > start)
-			end--;
-		ptr = (char *)malloc(sizeof(char) * (end - start + 1));
-		if (ptr)
-			ft_strlcpy(ptr, &s1[start], end - start + 1);
-	}
-	return (ptr);
+	if (!set)
+		return ((char *)s1);
+	i = 0;
+	while (s1[i] != 0 && ft_strchr(set, s1[i]))
+		i++;
+	start = i;
+	i = ft_strlen(s1) - 1;
+	while (i >= start && ft_strchr(set, s1[i]))
+		i--;
+	return (ft_substr(s1, start, i - start + 1));
 }
-/*
-int	main()
-{
-	char * s = ft_strtrim("   xxxtripouille", " x");
-	printf("%s\n", s);
-	return (0);
-}
-
-	char * s = ft_strtrim("   xxxtripouille", " x");
- check(!strcmp(s, "tripouille"));
- mcheck(s, strlen("tripouille") + 1); free(s); showLeaks();
-
-	s = ft_strtrim("tripouille   xxx", " x");
- check(!strcmp(s, "tripouille"));
- mcheck(s, strlen("tripouille") + 1); free(s); showLeaks();
-
-	s = ft_strtrim("   xxxtripouille   xxx", " x");
- check(!strcmp(s, "tripouille"));
- mcheck(s, strlen("tripouille") + 1); free(s); showLeaks();
-	
-	s = ft_strtrim("   xxx   xxx", " x");
- check(!strcmp(s, ""));
- mcheck(s, 1); free(s); showLeaks();
-
-	s = ft_strtrim("", "123");
- check(!strcmp(s, ""));
- mcheck(s, 1); free(s); showLeaks();
-
-	s = ft_strtrim("123", "");
- check(!strcmp(s, "123"));
-/ mcheck(s, 4); free(s); showLeaks();
-
-	s = ft_strtrim("", "");
- check(!strcmp(s, ""));
- mcheck(s, 1); free(s); showLeaks();
-	
-	s = ft_strtrim("abcdba", "acb");
-check(!strcmp(s, "d"));*/

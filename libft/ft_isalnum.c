@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 13:36:33 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:12 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/10/25 16:50:05 by olmartin          #+#    #+#             */
+/*   Updated: 2021/10/26 10:02:04 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isalnum(int c)
 {
-	if (c <= 'z' && c >= 'a')
-		return (1);
-	else if (c <= 'Z' && c >= 'A')
-		return (1);
-	else if (c <= '9' && c >= '0')
+	if (((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')))
 		return (1);
 	else
-		return (0);
+		if ((c >= '0' && c <= '9'))
+			return (1);
+	return (0);
 }

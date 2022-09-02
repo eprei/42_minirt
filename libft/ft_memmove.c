@@ -3,48 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 12:42:08 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:28 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/11/01 17:44:33 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/29 10:32:01 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	unsigned char	*ptr_dst;
-	unsigned char	*ptr_src;
-	size_t			index;
+	int		i;
 
-	index = 0;
-	ptr_dst = (unsigned char *) dst;
-	ptr_src = (unsigned char *) src;
-	if ((src == NULL) && (dst == NULL))
-		return (NULL);
-	else if (ptr_dst > ptr_src)
+	if (src == 0 && dst == 0)
+		return (dst);
+	if (src < dst)
 	{
-		while (len > 0)
+		i = (int)n - 1;
+		while (i >= 0)
 		{
-			ptr_dst [len - 1] = ptr_src [len - 1];
-			len--;
+			((char *)dst)[i] = ((char *)src)[i];
+			i--;
 		}
 	}
-	while (index < len)
+	else
 	{
-		ptr_dst[index] = ptr_src[index];
-		index++;
+		i = 0;
+		while (i < (int)n)
+		{
+			((char *)dst)[i] = ((char *)src)[i];
+			i++;
+		}
 	}
 	return (dst);
 }
-/*
-int	main()
-{
-	char one[15] = "123456789";
-	char two[15] = "000000000000";
-	
-	ft_memmove(one + 1, one, 8);
-	printf("%s\n", one);
-	return (0);
-}*/

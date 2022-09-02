@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 16:19:20 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:29 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/10/26 17:08:33 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/18 16:12:28 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft.h" 
 
 void	ft_putchar_fd(char c, int fd)
 {

@@ -3,64 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 12:42:46 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:50 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/11/09 13:59:28 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/18 16:24:01 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char	*dst, const	char *src, size_t dstsize)
 {
-	size_t	i;
-	size_t	j;
-	size_t	src_len;
-	size_t	dst_len;
+	size_t	is;
+	size_t	id;
+	size_t	lens;
+	size_t	lend;
 
-	j = 0;
-	dst_len = ft_strlen(dst);
-	src_len = ft_strlen(src);
-	i = dst_len;
-	if (size == 0)
-		return (src_len);
-	if (size < dst_len)
-		return (src_len + size);
+	lens = ft_strlen(src);
+	lend = ft_strlen(dst);
+	id = lend;
+	is = 0;
+	if (dstsize <= lend)
+		return (lens + dstsize);
 	else
 	{
-		while (src[j] && (dst_len + j) < size)
-			dst[i++] = src[j++];
-		if ((dst_len + j) == size && dst_len < size)
-			dst[--i] = '\0';
-		else
-			dst[i] = '\0';
-		return (src_len + dst_len);
+		while (src[is] != 0 && is < (dstsize - lend - 1))
+		{
+			dst[id] = src[is];
+			is++;
+			id++;
+		}
+		dst[id] = '\0';
 	}
+	return (lens + lend);
 }
-
-/*
-int	main()
-{
-	char str1[27] = "Hello World";
-	char str2[100] = " whats up 123456789";
-	char ptr1[27] = "Hello world";
-	char ptr2[100] = " whats up 123456789";
-	char dest[30]; memset(dest, 0, 30);
-	char * src = (char *)"AAAAAAAAA";
-	dest[0] = 'B';
-
-	char *str = "the cake is a lie !\0I'm hidden lol\r\n";
-	char buff1[0xF00] = "there is no stars in the sky";
-	char buff2[0xF00] = "there is no stars in the sky";
-	size_t max = 0;
-
-	ft_strlcat(dest, src, 1);
-	ft_strlcat(buff2, str, max);
-	strlcat(buff2, str, max);	
-	printf("the result is:\t%s\n", dest);
-	strlcat(str2, str1, 0);
-	ft_strlcat(str2, str1, 0);
-
-	return(0);
-}*/

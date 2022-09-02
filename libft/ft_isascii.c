@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 14:02:14 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:20 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/10/25 17:32:12 by olmartin          #+#    #+#             */
+/*   Updated: 2021/10/26 11:03:16 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isascii(int c)
 {
-	if (0 <= c && c <= 127)
+	if ((c >= 0 && c <= 127))
 		return (1);
-	else
-		return (0);
+	return (0);
 }

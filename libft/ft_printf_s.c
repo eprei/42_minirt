@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_print_s.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 09:58:13 by olmartin          #+#    #+#             */
-/*   Updated: 2021/11/15 11:20:01 by olmartin         ###   ########.fr       */
+/*   Created: 2021/12/02 09:31:13 by olmartin          #+#    #+#             */
+/*   Updated: 2022/02/23 15:17:05 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+int	ft_printf_s(const char *str)
 {
-	void	*ptr;
+	if (str == NULL)
+	{
+		str = "(null)";
+		ft_putstr_fd((char *)str, 1);
+	}
+	else
+		ft_putstr_fd((char *)str, 1);
+	return (ft_strlen(str));
+}
 
-	ptr = malloc(count * size);
-	if (ptr == 0)
-		return (0);
-	ft_bzero(ptr, count * size);
-	return (ptr);
+int	ft_printf_c(const int c)
+{
+	ft_putchar_fd(c, 1);
+	return (1);
 }

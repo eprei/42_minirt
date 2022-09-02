@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_rev_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 09:58:13 by olmartin          #+#    #+#             */
-/*   Updated: 2021/11/15 11:20:01 by olmartin         ###   ########.fr       */
+/*   Created: 2022/02/23 11:46:55 by olmartin          #+#    #+#             */
+/*   Updated: 2022/02/23 15:22:06 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+char	*ft_rev_tab(char *tab, size_t size)
 {
-	void	*ptr;
+	char	temp;
+	size_t	i;
 
-	ptr = malloc(count * size);
-	if (ptr == 0)
-		return (0);
-	ft_bzero(ptr, count * size);
-	return (ptr);
+	i = 0;
+	while (i < (size / 2))
+	{
+		temp = tab[i];
+		tab[i] = tab[size - 1 - i];
+		tab[size - 1 - i] = temp;
+		i++;
+	}
+	return (tab);
 }

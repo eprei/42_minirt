@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 12:44:39 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 15:42:18 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/10/27 12:01:26 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/18 11:44:39 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,28 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*substr;
-	size_t	i;
-	size_t	size_copy;
+	char	*res;
+	int		i;
+	int		l;
+	int		mal_l;
 
-	if (!s)
-		return (NULL);
-	if ((size_t)start > ft_strlen(s))
+	if (ft_strlen(s) < start)
 		return (ft_strdup(""));
-	if (len > strlen(s) - start)
-		size_copy = strlen(s) - start;
+	i = start;
+	l = 0;
+	if (len > ft_strlen(s))
+		mal_l = ft_strlen(s) - start + 1;
 	else
-		size_copy = len;
-	substr = malloc(sizeof(char) * (size_copy + 1));
-	if (substr == NULL)
-		return (NULL);
-	i = 0;
-	while (i < len && i < size_copy)
-	{
-		substr[i] = *(s + start + i);
+		mal_l = len + 1;
+	res = (char *)malloc(sizeof(char) * (mal_l));
+	if (res == 0)
+		return (0);
+	while (s[i] != 0 && l < (int)len)
+	{		
+		res[l] = s[i];
+		l++;
 		i++;
 	}
-	substr[i] = '\0';
-	return (substr);
+	res[l] = '\0';
+	return (res);
 }
-
-/*
-int	main()
-{
-
-char *str = "i just want this part #############";
-	size_t size = 10;
-	int ret_size;
-
-	ft_substr(str, 5, size);
-	return (0);
-}*/

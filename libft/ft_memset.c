@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 12:41:20 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:29 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/10/25 17:59:49 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/18 16:11:40 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	unsigned char	*ptr;
+	size_t	i;
 
-	ptr = (unsigned char *) b;
-	while (len > 0)
+	i = 0;
+	while (i < len)
 	{
-		*ptr++ = (unsigned char) c;
-		len--;
+		((char *)b)[i] = (char)c;
+		i++;
 	}
 	return (b);
 }

@@ -3,63 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 15:11:59 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:04 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/11/02 11:53:31 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/29 10:31:36 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+static int	ft_nb_blank(char *str);
+static void	ft_calc(char c, int *nb, int *s, int *flag);
 
-static int	ft_is_maj(long long int c)
+int	ft_atoi(char *str)
 {
-	if (c > 2147483647)
-		return (1);
-	return (0);
-}
+	int	i;
+	int	s;
+	int	nb;
+	int	flag;
 
-static int	ft_is_min(long long int c)
-{
-	if (c < -2147483648)
-		return (1);
-	return (0);
-}
-
-static int	ft_check(char c)
-{
-	if ((c == ' ') || (c == '\t') || (c == '\n')
-		|| (c == '\v') || (c == '\f') || (c == '\r'))
-		return (1);
-	else
+	s = 1;
+	nb = 0;
+	flag = 0;
+	if (str == 0)
 		return (0);
+	i = ft_nb_blank(str);
+	while (str[i] != 0 && flag < 2)
+	{
+		if (i > 19 && s == 1)
+			return (-1);
+		if (i > 18 && s == -1)
+			return (0);
+		ft_calc(str[i], &nb, &s, &flag);
+		i++;
+	}
+	return (s * nb);
 }
 
-int	ft_atoi(const char *str)
+static int	ft_nb_blank(char *str)
 {
-	long long int	result;
-	int				sign;
+	int	i;
 
-	sign = 1;
-	result = 0;
-	while (ft_check(*str))
-		str++;
-	if (*str == '-' || *str == '+')
-	{	
-		if (*str++ == '-')
-			sign = -1;
-	}
-	while (*str)
+	i = 0;
+	while ((str[i] > 8 && str[i] < 14) || str[i] == 32)
 	{
-		if (ft_is_maj(sign * result))
-			return (-1);
-		if (ft_is_min(sign * result))
-			return (0);
-		else if (*str >= '0' && *str <= '9')
-			result = result * 10 + (*str - '0');
-		else
-			break ;
-		str++;
+		i++;
 	}
-	return (sign * result);
+	return (i);
+}
+
+static void	ft_calc(char c, int *nb, int *s, int *flag)
+{
+	if (c >= '0' && c <= '9')
+	{
+		*nb = (*nb * 10) + (c - '0');
+		*flag = 1;
+	}
+	else if (c == '-')
+	{
+		if (*flag == 1)
+			*flag = 2;
+		else
+		{
+			*s = *s * -1;
+			*flag += 1;
+		}
+	}
+	else if (c == '+')
+		*flag += 1;
+	else
+		*flag = 2;
 }

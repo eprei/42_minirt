@@ -3,19 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 18:20:28 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:30 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/10/26 17:38:10 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/18 16:17:02 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft.h" 
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	if (s == NULL)
-		return ;
-	write(fd, s, ft_strlen(s));
-	write(fd, "\n", 1);
+	int		a;
+	char	c;
+
+	a = 0;
+	c = '\n';
+	while (s[a] != 0)
+	{
+		write(fd, &s[a], 1);
+		a++;
+	}
+	write(fd, &c, 1);
 }

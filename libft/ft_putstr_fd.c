@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 17:06:25 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:32 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/10/26 17:16:04 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/18 16:18:44 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (s == NULL)
-		return ;
-	write(fd, s, ft_strlen(s));
+	int	a;
+
+	a = 0;
+	while (s[a] != 0)
+	{
+		write(fd, &s[a], 1);
+		a++;
+	}
 }

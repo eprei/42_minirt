@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoa_printf.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/29 09:12:46 by olmartin          #+#    #+#             */
-/*   Updated: 2022/02/23 15:15:13 by olmartin         ###   ########.fr       */
+/*   Created: 2021/12/15 12:47:17 by olmartin          #+#    #+#             */
+/*   Updated: 2022/02/23 15:20:06 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-static char	*ft_tab(int n);
-static char	*ft_conv(int n, char *tab, int i);
+static char	*ft_tab(long n);
+static char	*ft_conv(long n, char *tab, int i);
 
-char	*ft_itoa(int n)
+char	*ft_itoa_printf(long n)
 {
 	char	*tab;
 
 	tab = ft_tab(n);
-	if (n == -2147483648)
-	{
-		tab[0] = '8';
-		tab = ft_conv(n / 10, tab, 1);
-	}
-	else
-		tab = ft_conv(n, tab, 0);
+	tab = ft_conv(n, tab, 0);
 	return (ft_rev_tab(tab, ft_strlen(tab)));
 }
 
-static char	*ft_tab(int n)
+static char	*ft_tab(long n)
 {
-	int		nb;
-	int		a;
+	long	nb;
+	long	a;
 	char	*ptr;
 
 	nb = 0;
@@ -47,13 +41,13 @@ static char	*ft_tab(int n)
 		nb++;
 	else if (n == 0)
 		nb++;
-	ptr = (char *)malloc(sizeof(char) * (nb + 1));
+	ptr = (char *)malloc(sizeof(char) * (100 + 1));
 	if (ptr == 0)
 		return (0);
 	return (ptr);
 }
 
-static char	*ft_conv(int n, char *tab, int i)
+static char	*ft_conv(long n, char *tab, int i)
 {
 	int	s;
 

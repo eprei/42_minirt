@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 14:58:03 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:54 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/11/04 09:15:28 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/18 16:27:56 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
-	while ((*s1 || *s2) && (i < n))
+	while ((s1[i] != 0 || s2[i] != 0) && i < n)
 	{
-		if (*s1 != *s2)
-			return (((unsigned char)*s1) - ((unsigned char)*s2));
-		s1++;
-		s2++;
+		if (s1[i] != s2[i])
+			return ((unsigned char)(s1[i]) - (unsigned char)(s2[i]));
 		i++;
 	}
 	return (0);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 16:25:50 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:58 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/10/26 15:04:31 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/18 16:32:22 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_tolower(int c)
 {
-	if (('A' <= c) && (c <= 'Z'))
+	if (c >= 'A' && c <= 'Z')
 		return (c + 32);
 	else
 		return (c);

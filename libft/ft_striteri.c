@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 12:45:40 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:49 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/11/05 10:04:54 by olmartin          #+#    #+#             */
+/*   Updated: 2021/11/25 09:07:01 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h" 
+
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned long int	i;
+	size_t	i;
 
-	i = 0;
-	if (!s || !f)
+	if (!s)
 		return ;
-	while (s[i] != '\0')
+	i = 0;
+	while (s[i])
 	{
-		f(i, &s[i]);
+		f(i, s + i);
 		i++;
 	}
+	return ;
 }

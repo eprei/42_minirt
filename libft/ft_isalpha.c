@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 11:32:41 by epresa-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:15 by epresa-c         ###   ########.fr       */
+/*   Created: 2021/10/25 14:12:49 by olmartin          #+#    #+#             */
+/*   Updated: 2021/10/25 17:29:52 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isalpha(int c)
 {
-	if (c <= 'z' && c >= 'a')
-		return (1);
-	else if (c <= 'Z' && c >= 'A')
-		return (1);
-	else
+	if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')))
 		return (0);
+	return (1);
 }
