@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/02 12:06:28 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/02 13:53:32 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,11 @@ typedef struct s_scene
 	int		n_objs;
 }	t_scene;
 
+/* *****************************  vector_utils.c  ****************************/
+
+t_vector	op_plus(const t_vector c1, const t_vector c2);
+t_vector	op_minus(const t_vector c1, const t_vector c2);
+t_vector	op_mult(double a, const t_vector c1);
+t_vector	op_div(const t_vector c1, double a);
+double		op_dot(const t_vector c1, const t_vector c2);
 #endif
