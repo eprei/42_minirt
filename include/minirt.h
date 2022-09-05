@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/05 10:16:11 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/05 11:34:01 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define CYLINDER 5
 # define WIDTH 1024
 # define HEIGHT 1024
+# define MY_PI 3.1415
 
 typedef struct s_vector
 {
@@ -50,7 +51,7 @@ typedef struct s_cam
 {
 	t_vector	pos;
 	t_vector	orient;
-	int			fov;
+	double		fov;
 }	t_cam;
 
 typedef struct s_obj
@@ -119,4 +120,5 @@ int			create_rgb(int r, int g, int v);
 double		max_v(double a);
 double		min_max(double a);
 int			raytracing(t_scene *scene, t_obj *obj1);
+int inter_sphere(const t_ray d, const t_obj  s, t_vector *p, t_vector *n);
 #endif

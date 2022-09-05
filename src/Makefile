@@ -6,7 +6,7 @@
 #    By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 10:31:46 by epresa-c          #+#    #+#              #
-#    Updated: 2022/09/05 10:16:41 by olmartin         ###   ########.fr        #
+#    Updated: 2022/09/05 11:14:16 by olmartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,24 +15,24 @@ NAME = miniRT
 
 NAMELIBFT = libft.a
 
-SRCS = src/main.c src/utils.c src/vector_utils.c src/raytracing.c
+SRCS = main.c utils.c vector_utils.c raytracing.c intersection.c
 
 OBJ = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 CC = gcc
 
-LIBFTPATH = ./libft/
+LIBFTPATH = ../libft/
 
-MLXPATH = ./mlx
+MLXPATH = ../mlx
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	# make -C $(LIBFTPATH)
 	# make -C $(MLXPATH)
-	CC -I .$(MLXPATH) $(SRCS) -L $(MLXPATH) $(LIBFTPATH)$(NAMELIBFT) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	${CC} ${CFLAGS} -I $(MLXPATH) $(SRCS) -L $(MLXPATH) $(LIBFTPATH)$(NAMELIBFT) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)

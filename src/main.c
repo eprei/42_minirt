@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/05 10:15:35 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:11:37 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,14 @@ int	main(int argc, char **argv)
 	}
 	res = raytracing(scene, obj1);
 	
+	mlx_loop(scene->mlx_ptr);
+
+
+	mlx_destroy_window(scene->mlx_ptr, scene->win_ptr);
+	free(scene->mlx_ptr);
 
 
 
-	printf("RED = %x\n", create_rgb(0, 125, 0));
+//	printf("RED = %x\n", create_rgb(0, 125, 0));
 	return (0);
 }

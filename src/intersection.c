@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/05 10:39:42 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/05 11:09:58 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ int	inter_sphere(const t_ray d, const t_obj  s, t_vector *p, t_vector *n)
 {
 	t_inter_sp	s_inter;
 
-	inter.a = 1;
-	inter.b = 2 * op_dot(d.d, op_minus(d.o, s.orig));
-	inter.c = get_norm2(op_minus(d.o, s.orig)) - s.radius * s.radius;
-	inter.delta = b * b - 4 * a * c;
-	if (delta < 0)
+	s_inter.a = 1;
+	s_inter.b = 2 * op_dot(d.d, op_minus(d.o, s.pos));
+	s_inter.c = get_norm2(op_minus(d.o, s.pos)) - s.diameter * s.diameter;
+	s_inter.delta = s_inter.b * s_inter.b - 4 * s_inter.a * s_inter.c;
+	if (s_inter.delta < 0)
 		return (0);
-	inter.t2 = (-b + sqrt(delta)) / (2 * a);
-	if (inter.t2 < 0)
+	s_inter.t2 = (-s_inter.b + sqrt(s_inter.delta)) / (2 * s_inter.a);
+	if (s_inter.t2 < 0)
 		return (0);
-	inter.t1 = (-b - sqrt(delta)) / (2 * a);
-	if (inter.t1 > 0)
-		inter.t = inter.t1;
+	s_inter.t1 = (-s_inter.b - sqrt(s_inter.delta)) / (2 * s_inter.a);
+	if (s_inter.t1 > 0)
+		s_inter.t = s_inter.t1;
 	else
-		inter.t = inter.t2;
-	*p = op_plus(d.o, op_mult(t, d.d));
-	*n = op_minus(*p, s.orig);
+		s_inter.t = s_inter.t2;
+	*p = op_plus(d.o, op_mult(s_inter.t, d.d));
+	*n = op_minus(*p, s.pos);
 	normalize(n);
 	return (1);
 }
