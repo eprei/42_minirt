@@ -12,22 +12,6 @@
 
 #include "../include/minirt.h"
 
-double	get_norm2(t_vector c1)
-{
-	return (c1.x * c1.x + c1.y * c1.y \
-			+ c1.z * c1.z);
-}
-
-void	normalize(t_vector *c1)
-{
-	double	norm;
-
-	norm = sqrt(get_norm2(*c1));
-	c1->x /= norm;
-	c1->y /= norm;
-	c1->z /= norm;
-}
-
 int	create_rgb(int r, int g, int b)
 {
 	return (0 << 24 | r << 16 | g << 8 | b);

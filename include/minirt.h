@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/05 11:34:01 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/05 16:56:35 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_trace
 {
 	int			i;
 	int			j;
-	double		intensite_pixel;
+	t_vector	intensite_pixel;
 	t_ray		s_r1;
 	t_vector	p;
 	t_vector	n;
@@ -112,6 +112,7 @@ typedef struct s_trace
 t_vector	op_plus(const t_vector c1, const t_vector c2);
 t_vector	op_minus(const t_vector c1, const t_vector c2);
 t_vector	op_mult(double a, const t_vector c1);
+t_vector	op_mult_c(double a, const t_color c1);
 t_vector	op_div(const t_vector c1, double a);
 double		op_dot(const t_vector c1, const t_vector c2);
 double		get_norm2(t_vector c1);
