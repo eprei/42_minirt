@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/02 17:24:45 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/05 10:16:11 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct s_scene
 {
 	int		h;
 	int		w;
+	void	*mlx_ptr;
+	void	*win_ptr;
 	t_cam	cam;
 	t_obj	l_amb;
 	t_obj	p_light;
@@ -87,6 +89,23 @@ typedef struct s_inter_sp
 	double	t;
 }	t_inter_sp;
 
+typedef struct s_ray
+{
+	t_vector	o;
+	t_vector	d;
+}	t_ray;
+
+typedef struct s_trace
+{
+	int			i;
+	int			j;
+	double		intensite_pixel;
+	t_ray		s_r1;
+	t_vector	p;
+	t_vector	n;
+	t_vector	tmp;
+}	t_trace;
+
 /* *****************************  vector_utils.c  ****************************/
 
 t_vector	op_plus(const t_vector c1, const t_vector c2);
@@ -99,4 +118,5 @@ void		normalize(t_vector *c1);
 int			create_rgb(int r, int g, int v);
 double		max_v(double a);
 double		min_max(double a);
+int			raytracing(t_scene *scene, t_obj *obj1);
 #endif

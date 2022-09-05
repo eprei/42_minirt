@@ -3,47 +3,46 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+         #
+#    By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/16 11:47:16 by olmartin          #+#    #+#              #
-#    Updated: 2022/09/02 15:36:24 by olmartin         ###   ########.fr        #
+#    Created: 2022/04/11 10:31:46 by epresa-c          #+#    #+#              #
+#    Updated: 2022/09/05 10:16:41 by olmartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		=  vector_utils.c utils.c main.c
 
+NAME = miniRT
 
-OBJS		= ${SRCS:.c=.o}
+NAMELIBFT = libft.a
 
-NAME		= minirt
+SRCS = src/main.c src/utils.c src/vector_utils.c src/raytracing.c
 
-CC			= gcc
+OBJ = $(SRCS:.c=.o)
 
-RM			= rm -f
+CFLAGS = -Wall -Wextra -Werror
 
-CFLAGS		= -Wall -Werror -Wextra -g
+CC = gcc
 
-LIBFLAGS	= -L../libft -lft -L../mlx -lmlx -framework OpenGL -framework AppKit
+LIBFTPATH = ./libft/
 
-.c.o:	
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+MLXPATH = ./mlx
 
-all:		${SRCS} ${OBJS}	
-			#${MAKE} -C ../libft/
-			#${MAKE} -C ../mlx/
-			${CC} -o ${NAME} ${LIBFLAGS} ${OBJS}
+all: $(NAME)
 
+$(NAME): $(OBJ)
+	# make -C $(LIBFTPATH)
+	# make -C $(MLXPATH)
+	CC -I .$(MLXPATH) $(SRCS) -L $(MLXPATH) $(LIBFTPATH)$(NAMELIBFT) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-.PHONY:		all clean fclean  re
+clean:
+	rm -rf $(OBJ)
+	# make clean -C $(LIBFTPATH)
+	# make clean -C $(MLXPATH)
 
-clean:	
-			${RM} ${OBJS}
-			#${MAKE} clean -C ../libft
-			#${MAKE} clean -C ../mlx
+fclean: clean
+	rm -rf $(NAME)
+	# make fclean -C $(LIBFTPATH)
 
+re: fclean all
 
-fclean:		clean
-			${RM} ${NAME}
-			#${MAKE} fclean -C ../libft
-
-re:			fclean all
+.PHONY: all clean fclean re

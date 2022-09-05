@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/02 17:24:41 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/05 10:15:35 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,35 +17,35 @@ int	main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 
+	int		res;
 	t_scene	*scene;
-	t_cam	*cam;
 	t_obj	*obj1;
-	void	*mlx_ptr;
-	void	*win_ptr;	
+	//void	*mlx_ptr;
+	//void	*win_ptr;	
 
 	scene = (t_scene*)malloc(sizeof(t_scene));
-	cam = (t_cam*)malloc(sizeof(t_cam));
 	obj1 = (t_obj*)malloc(sizeof(t_obj));
-	if (!scene || !cam || !obj1)
+	if (!scene)
 		//close
 		return (0);
 	scene->h = 1000;
 	scene->w = 1000;
-	cam->fov = 60 * M_PI / 180;
+	scene->cam.fov = 60 * M_PI / 180;
 	obj1->pos.x = 0;obj1->pos.y = 0;obj1->pos.z = -55;
 	obj1->diameter = 20;
 	scene->p_light.pos.x = 15;scene->p_light.pos.y = 70;
 	scene->p_light.pos.z = -40;scene->p_light.intensity = 1000000;
-	mlx_ptr = mlx_init();
-	if (mlx_ptr == NULL)
+	scene->mlx_ptr = mlx_init();
+	if (scene->mlx_ptr == NULL)
 		return (1);
-	win_ptr = mlx_new_window(mlx_ptr, scene->h, scene->w, "42 testRT");
-	if (win_ptr == NULL)
+	scene->win_ptr = mlx_new_window(scene->mlx_ptr, scene->h, scene->w, "42 testRT");
+	if (scene->win_ptr == NULL)
 	{
-		free(win_ptr);
+		free(scene->win_ptr);
 		return (1);
 	}
-
+	res = raytracing(scene, obj1);
+	
 
 
 
