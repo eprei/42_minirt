@@ -6,15 +6,14 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/05 11:09:58 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/06 11:21:03 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
 
 //int	inter_sphere(const t_ray d, const t_obj  s, t_vector *p, t_vector *n)
-int	inter_sphere(const t_ray d, const t_obj  s, t_vector *p, t_vector *n)
-	
+int	inter_sphere(const t_ray d, const t_obj s, t_vector *p, t_vector *n)
 {
 	t_inter_sp	s_inter;
 

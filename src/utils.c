@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:03:58 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/06 09:04:07 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/06 13:46:07 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,14 @@ t_vector	init_vector(double x, double y, double z)
 	vector.y = y;
 	vector.z = z;
 	return (vector);
+}
+
+t_color	init_vec_col(int r, int g, int b)
+{
+	t_color	color;
+
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	return (color);
 }

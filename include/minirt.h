@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/05 16:56:35 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/06 13:59:18 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,9 @@ void		normalize(t_vector *c1);
 int			create_rgb(int r, int g, int v);
 double		max_v(double a);
 double		min_max(double a);
+t_vector    init_vector(double x, double y, double z);
+t_color		init_vec_col(int r, int g, int b);
 int			raytracing(t_scene *scene, t_obj *obj1);
 int inter_sphere(const t_ray d, const t_obj  s, t_vector *p, t_vector *n);
+t_vector    albedo(t_color col);
 #endif
