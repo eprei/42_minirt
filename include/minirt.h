@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/06 13:59:18 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:55:19 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,9 @@ typedef struct s_trace
 
 /* *****************************  vector_utils.c  ****************************/
 
+t_obj		*start_t_obj(t_scene *scene);
+void		add_t_obj(t_scene *scene);
+int			count_objs(t_scene *scene);
 t_vector	op_plus(const t_vector c1, const t_vector c2);
 t_vector	op_minus(const t_vector c1, const t_vector c2);
 t_vector	op_mult(double a, const t_vector c1);

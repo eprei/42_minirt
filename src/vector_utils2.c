@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:57:51 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/06 14:20:47 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:40:08 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_vector	albedo(t_color col)
 	t_vector	res;
 
 	res.x = col.r / 255.0;
-	res.y = col.g / 255.0; 
+	res.y = col.g / 255.0;
 	res.z = col.b / 255.0;
 	return (res);
 }
