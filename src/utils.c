@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:03:58 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/02 16:54:18 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/06 09:04:07 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,14 @@ double	min_max(double a)
 	if (a < 0)
 		return (0);
 	return (a);
+}
+
+t_vector	init_vector(double x, double y, double z)
+{
+	t_vector	vector;
+
+	vector.x = x;
+	vector.y = y;
+	vector.z = z;
+	return (vector);
 }
