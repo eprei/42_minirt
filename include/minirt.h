@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/07 14:11:21 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:14:09 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define WIDTH 1024
 # define HEIGHT 1024
 # define MY_PI 3.1415
+# define ESC_KEY 53
 
 typedef struct s_vector
 {
@@ -139,4 +140,5 @@ t_color		init_vec_col(int r, int g, int b);
 int			raytracing(t_scene *scene, t_obj *obj1);
 int inter_sphere(const t_ray d, const t_obj  s, t_vector *p, t_vector *n, double t);
 t_vector    albedo(t_color col);
+int			deal_key(int key, t_scene *scene);
 #endif

@@ -6,11 +6,17 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/07 14:22:37 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:01:35 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
+
+int	exit_button(void)
+{
+	write(1, "You have choosen to close the window !\n", 39);
+	exit(0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -52,7 +58,8 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	res = raytracing(scene, scene->obj_0);
-	
+	mlx_key_hook(scene->win_ptr, &deal_key, scene);
+	mlx_hook(scene->win_ptr, 17, 0, &exit_button, NULL);	
 	mlx_loop(scene->mlx_ptr);
 
 
