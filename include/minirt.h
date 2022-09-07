@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/07 15:14:09 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:49:57 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ double		min_max(double a);
 t_vector    init_vector(double x, double y, double z);
 t_color		init_vec_col(int r, int g, int b);
 int			raytracing(t_scene *scene, t_obj *obj1);
-int inter_sphere(const t_ray d, const t_obj  s, t_vector *p, t_vector *n, double t);
+int inter_sphere(const t_ray d, const t_obj  s, t_ret_ray *ret);
 t_vector    albedo(t_color col);
 int			deal_key(int key, t_scene *scene);
 #endif
