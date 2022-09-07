@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/06 15:55:19 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:11:21 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef struct s_inter_sp
 	double	delta;
 	double	t1;
 	double	t2;
-	double	t;
+	double	t;// pas utile depuis multisphere ??
 }	t_inter_sp;
 
 typedef struct s_ray
@@ -95,6 +95,14 @@ typedef struct s_ray
 	t_vector	o;
 	t_vector	d;
 }	t_ray;
+
+typedef struct s_ret_ray
+{
+	t_vector	p;
+	t_vector	n;
+	double		t;
+	t_color		col;
+}	t_ret_ray;
 
 typedef struct s_trace
 {
@@ -109,9 +117,12 @@ typedef struct s_trace
 
 /* *****************************  vector_utils.c  ****************************/
 
+void		init_node(t_obj *new_node);
 t_obj		*start_t_obj(t_scene *scene);
 void		add_t_obj(t_scene *scene);
 int			count_objs(t_scene *scene);
+void		del_content(void *content);
+void		rt_lstclear(t_obj **objs, void (*del)(void *));
 t_vector	op_plus(const t_vector c1, const t_vector c2);
 t_vector	op_minus(const t_vector c1, const t_vector c2);
 t_vector	op_mult(double a, const t_vector c1);
@@ -126,6 +137,6 @@ double		min_max(double a);
 t_vector    init_vector(double x, double y, double z);
 t_color		init_vec_col(int r, int g, int b);
 int			raytracing(t_scene *scene, t_obj *obj1);
-int inter_sphere(const t_ray d, const t_obj  s, t_vector *p, t_vector *n);
+int inter_sphere(const t_ray d, const t_obj  s, t_vector *p, t_vector *n, double t);
 t_vector    albedo(t_color col);
 #endif

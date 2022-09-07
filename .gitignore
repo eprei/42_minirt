@@ -2,3 +2,6 @@
 libft/*
 mlx/*
 src/*.o
+src/miniRT
+src/miniRT.dSYM/
+*/*.swp

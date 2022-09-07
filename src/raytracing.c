@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:25:31 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/06 17:14:20 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:14:11 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	raytracing(t_scene *scene, t_obj *obj1)
 		    s_t1.s_r1.d.y = s_t1.i - scene->h / 2;
 		   	s_t1.s_r1.d.z = - scene->w / (2 * tan(scene->cam.fov/2));
 			normalize(&s_t1.s_r1.d);
-			if (inter_sphere(s_t1.s_r1, *obj1, &s_t1.p, &s_t1.n))
+			if (inter_sphere(s_t1.s_r1, *obj1, &s_t1.p, &s_t1.n, 0))
 //			if (inter_obj(s_t1.s_r1, scene,  &s_t1.p, &s_t1.n)			
 			{
 				s_t1.tmp = op_minus(scene->p_light.pos, s_t1.p);

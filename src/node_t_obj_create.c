@@ -12,6 +12,19 @@
 
 #include "../include/minirt.h"
 
+
+void	init_node(t_obj *new_node)
+{
+		new_node->type = 0;
+		new_node->pos = init_vector(0, 0, 0);
+		new_node->orientation = init_vector(0, 0, 0);
+		new_node->color = init_vec_col(0, 0, 0);
+		new_node->intensity = 0;
+		new_node->diameter = 0;
+		new_node->height = 0;
+		new_node->next = NULL;
+}
+
 t_obj	*start_t_obj(t_scene *scene)
 {
 	t_obj	*new_node;
@@ -21,7 +34,8 @@ t_obj	*start_t_obj(t_scene *scene)
 		ft_printf("Error malloc: new node creation has failed\n");
 	else
 	{
-		new_node->type = 0;
+		init_node(new_node);
+/*		new_node->type = 0;
 		new_node->pos = init_vector(0, 0, 0);
 		new_node->orientation = init_vector(0, 0, 0);
 		new_node->color = init_vec_col(0, 0, 0);
@@ -29,7 +43,7 @@ t_obj	*start_t_obj(t_scene *scene)
 		new_node->diameter = 0;
 		new_node->height = 0;
 		new_node->next = NULL;
-		scene->obj_0 = new_node;
+*/		scene->obj_0 = new_node;
 	}
 	return (new_node);
 }
@@ -47,7 +61,8 @@ void	add_t_obj(t_scene *scene)
 		ft_printf("Error malloc: new node creation has failed\n");
 	else
 	{
-		new_node->type = 0;
+		init_node(new_node);
+/*		new_node->type = 0;
 		new_node->pos = init_vector(0, 0, 0);
 		new_node->orientation = init_vector(0, 0, 0);
 		new_node->color = init_vec_col(0, 0, 0);
@@ -55,7 +70,7 @@ void	add_t_obj(t_scene *scene)
 		new_node->diameter = 0;
 		new_node->height = 0;
 		new_node->next = NULL;
-		curr->next = new_node;
+*/		curr->next = new_node;
 	}
 }
 
