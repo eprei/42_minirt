@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:25:31 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/07 16:06:05 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:02:02 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,22 @@ int	inter_obj(t_ray s_r1, t_scene *scene, t_ret_ray *ret)
 	t_ret_ray	loc_ret;
 
 	res = 0;
-	ret->t = 0.0;
+	ret->t = 1E9;
 	if (scene != NULL && scene->obj_0 != NULL)
 	{
 		current = scene->obj_0;
 		while (current != NULL)
 		{
-			if (inter_sphere(s_r1, *current, ret))
+			if (inter_sphere(s_r1, *current, &loc_ret))
 			{
 				res = 1;
 				if (loc_ret.t < ret->t)
-					ret = &loc_ret;
+				{
+					ret->p = loc_ret.p;
+					ret->n = loc_ret.n;
+					ret->t = loc_ret.t;
+					ret->col = current->color;
+				}
 			}
 			current = current->next;
 		}
@@ -70,11 +75,10 @@ int	raytracing(t_scene *scene, t_obj *obj1)
 /*				s_t1.intensite_pixel = op_mult_c(scene->p_light.intensity * \
 				max_v(op_dot(s_t1.tmp, s_t1.n)) / \
 				get_norm2(op_minus(scene->p_light.pos, s_t1.p)), obj1->color); 
-			if (int_pix > 0.1 && s_t1.i > 77)
+			if (int_pix > 0.1)// && s_t1.i > 77)
 				printf("%d - %d - intens %f\n", s_t1.i, s_t1.j, int_pix);
 */			}
-/*			mlx_pixel_put(scene->mlx_ptr, scene->win_ptr, s_t1.j, scene->h - s_t1.i - 1, create_rgb(min_max(int_pix), min_max(int_pix), min_max(int_pix)));
-*/		mlx_pixel_put(scene->mlx_ptr, scene->win_ptr, s_t1.j, scene->h - s_t1.i - 1, create_rgb(min_max(s_t1.intensite_pixel.x), min_max(s_t1.intensite_pixel.y), min_max(s_t1.intensite_pixel.z)));
+		mlx_pixel_put(scene->mlx_ptr, scene->win_ptr, s_t1.j, scene->h - s_t1.i - 1, create_rgb(min_max(s_t1.intensite_pixel.x), min_max(s_t1.intensite_pixel.y), min_max(s_t1.intensite_pixel.z)));
 			s_t1.j++;
 		}
 		s_t1.j = 0;

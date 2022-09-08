@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/07 16:15:18 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:03:19 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,9 @@ int	main(int argc, char **argv)
 	scene->obj_0->diameter = 20;
 	scene->obj_0->color = init_vec_col(255, 100, 0);
 	add_t_obj(scene);
-	scene->obj_0->next->pos = init_vector(30,-10, -60);
+	scene->obj_0->next->pos = init_vector(30, -10, -60);
 	scene->obj_0->next->diameter = 10;
 	scene->obj_0->next->color = init_vec_col(100, 200, 0);
-
 	scene->p_light.pos = init_vector(15, 70, -40);
 	scene->p_light.intensity = 1000000;
 	scene->mlx_ptr = mlx_init();

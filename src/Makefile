@@ -6,7 +6,7 @@
 #    By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 10:31:46 by epresa-c          #+#    #+#              #
-#    Updated: 2022/09/07 13:43:16 by olmartin         ###   ########.fr        #
+#    Updated: 2022/09/08 12:54:22 by olmartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS = main.c utils.c vector_utils.c raytracing.c intersection.c \
 
 OBJ = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 CC = gcc
 
