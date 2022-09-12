@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/07 15:49:57 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/12 11:13:58 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,14 @@ typedef struct s_trace
 {
 	int			i;
 	int			j;
+	double		t;
 	t_vector	intensite_pixel;
 	t_ray		s_r1;
+	t_ray		s_rli;
 	t_vector	p;
 	t_vector	n;
+	//t_vector	p_light;
+	//t_vector	n_light;
 	t_vector	tmp;
 }	t_trace;
 
@@ -137,7 +141,7 @@ double		max_v(double a);
 double		min_max(double a);
 t_vector    init_vector(double x, double y, double z);
 t_color		init_vec_col(int r, int g, int b);
-int			raytracing(t_scene *scene, t_obj *obj1);
+int			raytracing(t_scene *scene);
 int inter_sphere(const t_ray d, const t_obj  s, t_ret_ray *ret);
 t_vector    albedo(t_color col);
 int			deal_key(int key, t_scene *scene);

@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:25:31 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/08 15:18:07 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/12 11:17:44 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,18 @@ int	inter_obj(t_ray s_r1, t_scene *scene, t_ret_ray *ret)
 	return (res);
 }
 
-int	raytracing(t_scene *scene, t_obj *obj1)
+int	raytracing(t_scene *scene)
 {
-	(void)obj1;
 	t_trace	s_t1;
 	double int_pix;
 	t_ret_ray	ret;
+	t_ret_ray	ret_shadow;
+	int		is_shadow;
 
 	s_t1.i = 0;
 	s_t1.j = 0;
 	s_t1.s_r1.o = init_vector(0, 0, 0);
+	s_t1.s_rli.o = init_vector(0, 0, 0);
 	while (s_t1.i < scene->h)
 	{
 		while (s_t1.j < scene->w)
@@ -63,22 +65,26 @@ int	raytracing(t_scene *scene, t_obj *obj1)
 		    s_t1.s_r1.d.y = s_t1.i - scene->h / 2;
 		   	s_t1.s_r1.d.z = - scene->w / (2 * tan(scene->cam.fov/2));
 			normalize(&s_t1.s_r1.d);
-//			if (inter_sphere(s_t1.s_r1, *obj1, &ret))
 			if (inter_obj(s_t1.s_r1, scene, &ret))			
 			{
+				s_t1.s_rli.o = op_plus(ret.p, op_mult(0.01, ret.n)); // pour ombre
 				s_t1.tmp = op_minus(scene->p_light.pos, ret.p);
 				normalize(&s_t1.tmp);
-				int_pix = scene->p_light.intensity * \
-				max_v(op_dot(s_t1.tmp, ret.n)) / \
-				get_norm2(op_minus(scene->p_light.pos, ret.p)); 
-				//s_t1.intensite_pixel = op_mult(int_pix, albedo(obj1->color)); 
-				s_t1.intensite_pixel = op_mult(int_pix, albedo(ret.col)); 
-/*				s_t1.intensite_pixel = op_mult_c(scene->p_light.intensity * \
-				max_v(op_dot(s_t1.tmp, s_t1.n)) / \
-				get_norm2(op_minus(scene->p_light.pos, s_t1.p)), obj1->color); 
-			if (int_pix > 0.1)// && s_t1.i > 77)
-				printf("%d - %d - intens %f\n", s_t1.i, s_t1.j, int_pix);
-*/			}
+				s_t1.s_rli.d = s_t1.tmp;
+				double d_light_2 = get_norm2(op_minus(scene->p_light.pos, ret.p));
+				is_shadow = inter_obj(s_t1.s_rli, scene, &ret_shadow);
+				if (is_shadow && (ret_shadow.t * ret_shadow.t < d_light_2))
+						s_t1.intensite_pixel = init_vector(0, 0, 0);
+				else
+				{
+					int_pix = scene->p_light.intensity * \
+					max_v(op_dot(s_t1.tmp, ret.n)) / \
+					get_norm2(op_minus(scene->p_light.pos, ret.p)); //cette ligne remplacable par d_light_2 !!
+					s_t1.intensite_pixel = op_mult(int_pix, albedo(ret.col)); 
+/*					if (int_pix > 0.1)// && s_t1.i > 77)
+						printf("%d - %d - intens %f\n", s_t1.i, s_t1.j, int_pix);
+*/				}							
+			}
 		mlx_pixel_put(scene->mlx_ptr, scene->win_ptr, s_t1.j, scene->h - s_t1.i - 1, create_rgb(min_max(s_t1.intensite_pixel.x), min_max(s_t1.intensite_pixel.y), min_max(s_t1.intensite_pixel.z)));
 			s_t1.j++;
 		}
