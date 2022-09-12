@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/12 12:48:51 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:57:49 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,51 @@ int	main(int argc, char **argv)
 	t_scene	*scene;
 	t_obj	*obj1;
 	//void	*mlx_ptr;
-	//void	*win_ptr;	
+	//void	*win_ptr;
 
 	scene = (t_scene *)malloc(sizeof(t_scene));
 	obj1 = (t_obj *)malloc(sizeof(t_obj));
 	if (!scene)
 		//close
 		return (0);
-	scene->h = 1000;
-	scene->w = 1000;
-	scene->cam.fov = 60 * M_PI / 180;
+
+	t_vector	pos;
+	t_vector	orient;
+	double		fov;
+
+	fov = 90;
+	pos = init_vector(50, 0, -55);
+	orient = init_vector(-1, -0.2, 0);
+	init_cam(scene, pos, orient, fov);
+
+	t_color	l_amb_color;
+	double	l_amb_intensity;
+
+	l_amb_intensity = 0.4;
+	l_amb_color = init_vec_col(255, 255, 255);
+
+	init_l_amb(scene, l_amb_intensity, l_amb_color);
+
+	scene->h = 800;
+	scene->w = 800;
 	start_t_obj(scene);
-	scene->obj_0->pos = init_vector(0, 0, -55);
-	scene->obj_0->diameter = 20;
-	scene->obj_0->color = init_vec_col(255, 100, 0);
+	scene->obj_0->type = PLAN;
+	scene->obj_0->pos = init_vector(0, -20, 0);
+	scene->obj_0->orientation = init_vector(0, 1, 0);
+	scene->obj_0->color = init_vec_col(200, 10, 10);
 	add_t_obj(scene);
-	scene->obj_0->next->pos = init_vector(30, -10, -60);
+	scene->obj_0->next->type = SPHERE;
+	scene->obj_0->next->pos = init_vector(0, 0, -55);
 	scene->obj_0->next->diameter = 20;
-	scene->obj_0->next->color = init_vec_col(100, 200, 0);
-	scene->p_light.pos = init_vector(-20, 5, 0);
-	scene->p_light.intensity = 1000000;
+	scene->obj_0->next->color = init_vec_col(255, 100, 0);
+	add_t_obj(scene);
+	scene->obj_0->next->next->type = SPHERE;
+	scene->obj_0->next->next->pos = init_vector(30, -10, -60);
+	scene->obj_0->next->next->diameter = 10;
+	scene->obj_0->next->next->color = init_vec_col(100, 200, 0);
+	scene->p_light.pos = init_vector(25, 60, -65);
+	scene->p_light.intensity = 500000;
+
 	scene->mlx_ptr = mlx_init();
 	if (scene->mlx_ptr == NULL)
 		return (1);

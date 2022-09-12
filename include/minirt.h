@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/12 11:13:58 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:36:30 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_cam
 {
 	t_vector	pos;
 	t_vector	orient;
+	t_vector	up;
+	t_vector	right;
 	double		fov;
 }	t_cam;
 
@@ -142,7 +144,12 @@ double		min_max(double a);
 t_vector    init_vector(double x, double y, double z);
 t_color		init_vec_col(int r, int g, int b);
 int			raytracing(t_scene *scene);
-int inter_sphere(const t_ray d, const t_obj  s, t_ret_ray *ret);
-t_vector    albedo(t_color col);
+int			inter_sphere(const t_ray d, const t_obj  s, t_ret_ray *ret);
+t_vector	albedo(t_color col);
 int			deal_key(int key, t_scene *scene);
+void		init_cam(t_scene *scene, t_vector pos, t_vector orient, double fov);
+void		init_l_amb(t_scene *scene, double intensity, t_color color);
+t_vector	cross(t_vector vect_a, t_vector vect_b);
+int			inter_plane(const t_ray d, const t_obj plane, t_ret_ray *ret);
+
 #endif
