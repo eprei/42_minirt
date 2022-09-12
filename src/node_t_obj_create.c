@@ -6,12 +6,11 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 10:25:09 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/06 15:59:48 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/12 12:50:33 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
-
 
 void	init_node(t_obj *new_node)
 {
@@ -35,15 +34,7 @@ t_obj	*start_t_obj(t_scene *scene)
 	else
 	{
 		init_node(new_node);
-/*		new_node->type = 0;
-		new_node->pos = init_vector(0, 0, 0);
-		new_node->orientation = init_vector(0, 0, 0);
-		new_node->color = init_vec_col(0, 0, 0);
-		new_node->intensity = 0;
-		new_node->diameter = 0;
-		new_node->height = 0;
-		new_node->next = NULL;
-*/		scene->obj_0 = new_node;
+		scene->obj_0 = new_node;
 	}
 	return (new_node);
 }
@@ -62,15 +53,7 @@ void	add_t_obj(t_scene *scene)
 	else
 	{
 		init_node(new_node);
-/*		new_node->type = 0;
-		new_node->pos = init_vector(0, 0, 0);
-		new_node->orientation = init_vector(0, 0, 0);
-		new_node->color = init_vec_col(0, 0, 0);
-		new_node->intensity = 0;
-		new_node->diameter = 0;
-		new_node->height = 0;
-		new_node->next = NULL;
-*/		curr->next = new_node;
+		curr->next = new_node;
 	}
 }
 

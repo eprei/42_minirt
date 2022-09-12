@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:34:28 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/07 15:15:55 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/12 12:52:01 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_close(char *s, t_scene *scene, int level)
 {
 	(void)s;
 	(void)level;
-    write(1, "You have choosen to close the window !\n", 39);
+	write(1, "You have choosen to close the window !\n", 39);
 	rt_lstclear(&scene->obj_0, &del_content);		
 	exit (0);
 }
