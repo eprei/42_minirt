@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/12 14:36:30 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/13 10:13:18 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,15 +141,16 @@ void		normalize(t_vector *c1);
 int			create_rgb(int r, int g, int v);
 double		max_v(double a);
 double		min_max(double a);
-t_vector    init_vector(double x, double y, double z);
+t_vector	init_vector(double x, double y, double z);
 t_color		init_vec_col(int r, int g, int b);
 int			raytracing(t_scene *scene);
-int			inter_sphere(const t_ray d, const t_obj  s, t_ret_ray *ret);
+int			inter_sphere(const t_ray d, const t_obj s, t_ret_ray *ret);
 t_vector	albedo(t_color col);
 int			deal_key(int key, t_scene *scene);
 void		init_cam(t_scene *scene, t_vector pos, t_vector orient, double fov);
 void		init_l_amb(t_scene *scene, double intensity, t_color color);
 t_vector	cross(t_vector vect_a, t_vector vect_b);
 int			inter_plane(const t_ray d, const t_obj plane, t_ret_ray *ret);
+void		init_scene(t_scene *scene);
 
 #endif

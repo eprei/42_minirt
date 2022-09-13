@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:25:31 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/12 14:49:56 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/13 10:20:33 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,43 +55,63 @@ int	inter_obj(t_ray s_r1, t_scene *scene, t_ret_ray *ret)
 				}
 			}
 			current = current->next;
-
 		}
 	}
 	return (res);
 }
 
+void	calcule_canvas(t_trace *s_t1, t_scene scene)
+{
+	t_vector	new_x;
+	t_vector	new_y;
+	t_vector	new_z;
+	t_vector	temp1;
+	t_vector	temp2;
+
+	s_t1->s_r1.d.x = s_t1->j - scene.w / 2;
+	s_t1->s_r1.d.y = s_t1->i - scene.h / 2;
+	s_t1->s_r1.d.z = scene.w / (2 * tan(scene.cam.fov / 2));
+	new_x = op_mult(s_t1->s_r1.d.x, scene.cam.right);
+	new_y = op_mult(s_t1->s_r1.d.y, scene.cam.up);
+	new_z = op_mult(s_t1->s_r1.d.z, scene.cam.orient);
+	temp1 = op_plus(new_x, new_y);
+	temp2 = op_plus(temp1, new_z);
+	s_t1->s_r1.d = temp2;
+	normalize(&s_t1->s_r1.d);
+}
+
+void	add_ambience_light(t_trace *s_t1, t_ret_ray ret, t_scene scene)
+{
+	float	k;
+
+	k = (float) 100 / (float) 255 / (float) 100;
+	s_t1->intensite_pixel.x += (ret.col.r * scene.l_amb.color.r \
+	* scene.l_amb.intensity * k);
+	s_t1->intensite_pixel.y += (ret.col.g * scene.l_amb.color.g \
+	* scene.l_amb.intensity * k);
+	s_t1->intensite_pixel.z += (ret.col.b * scene.l_amb.color.b \
+	* scene.l_amb.intensity * k);
+}
+
 int	raytracing(t_scene *scene)
 {
-	t_trace	s_t1;
-	double int_pix;
+	t_trace		s_t1;
+	double		int_pix;
 	t_ret_ray	ret;
 	t_ret_ray	ret_shadow;
-	int		is_shadow;
+	int			is_shadow;
 
 	s_t1.i = 0;
 	s_t1.j = 0;
 	s_t1.s_r1.o = scene->cam.pos;
 	s_t1.s_rli.o = init_vector(0, 0, 0);
-	normalize(&scene->cam.right);
-	normalize(&scene->cam.up);
-	normalize(&scene->cam.orient);
 	while (s_t1.i < scene->h)
 	{
 		while (s_t1.j < scene->w)
 		{
 			int_pix = 0.0;
 			s_t1.intensite_pixel = init_vector(0, 0, 0);
-			s_t1.s_r1.d.x = s_t1.j - scene->w /2;
-		    s_t1.s_r1.d.y = s_t1.i - scene->h / 2;
-		   	s_t1.s_r1.d.z = /*-*/ scene->w / (2 * tan(scene->cam.fov/2));
-			t_vector new_x = op_mult(s_t1.s_r1.d.x, scene->cam.right);
-			t_vector new_y = op_mult(s_t1.s_r1.d.y, scene->cam.up);
-			t_vector new_z = op_mult(s_t1.s_r1.d.z, scene->cam.orient);
-			t_vector temp1 = op_plus(new_x, new_y);
-			t_vector temp2 = op_plus(temp1, new_z);
-			s_t1.s_r1.d = temp2;
-			normalize(&s_t1.s_r1.d);
+			calcule_canvas(&s_t1, *scene);
 			if (inter_obj(s_t1.s_r1, scene, &ret))
 			{
 				s_t1.s_rli.o = op_plus(ret.p, op_mult(0.01, ret.n)); // pour ombre
@@ -111,11 +131,7 @@ int	raytracing(t_scene *scene)
 /*					if (int_pix > 0.1)// && s_t1.i > 77)
 						printf("%d - %d - intens %f\n", s_t1.i, s_t1.j, int_pix);
 */				}
-				float	k;
-				k = (float) 100 / (float) 255 / (float) 100;
-				s_t1.intensite_pixel.x += (ret.col.r * scene->l_amb.color.r * scene->l_amb.intensity * k);
-				s_t1.intensite_pixel.y += (ret.col.g * scene->l_amb.color.g * scene->l_amb.intensity * k);
-				s_t1.intensite_pixel.z += (ret.col.b * scene->l_amb.color.b * scene->l_amb.intensity * k);
+				add_ambience_light(&s_t1, ret, *scene);
 			}
 		mlx_pixel_put(scene->mlx_ptr, scene->win_ptr, s_t1.j, scene->h - s_t1.i - 1, create_rgb(min_max(s_t1.intensite_pixel.x), min_max(s_t1.intensite_pixel.y), min_max(s_t1.intensite_pixel.z)));
 			s_t1.j++;
