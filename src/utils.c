@@ -33,22 +33,15 @@ double	min_max(double a)
 	return (a);
 }
 
-t_vector	init_vector(double x, double y, double z)
+void	tab_free(char **tab)
 {
-	t_vector	vector;
+	int	i;
 
-	vector.x = x;
-	vector.y = y;
-	vector.z = z;
-	return (vector);
-}
-
-t_color	init_vec_col(int r, int g, int b)
-{
-	t_color	color;
-
-	color.r = r;
-	color.g = g;
-	color.b = b;
-	return (color);
+	i = 0;
+	while (tab && tab[i])
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
 }

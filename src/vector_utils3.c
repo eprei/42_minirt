@@ -21,3 +21,23 @@ t_vector	cross(t_vector vect_a, t_vector vect_b)
 	res.z = vect_a.x * vect_b.y - vect_a.y * vect_b.x;
 	return (res);
 }
+
+t_vector	init_vector(double x, double y, double z)
+{
+	t_vector	vector;
+
+	vector.x = x;
+	vector.y = y;
+	vector.z = z;
+	return (vector);
+}
+
+t_color	init_vec_col(int r, int g, int b)
+{
+	t_color	color;
+
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	return (color);
+}

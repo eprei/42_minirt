@@ -6,7 +6,7 @@
 #    By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 10:31:46 by epresa-c          #+#    #+#              #
-#    Updated: 2022/09/13 10:54:54 by olmartin         ###   ########.fr        #
+#    Updated: 2022/09/13 14:18:36 by olmartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAMELIBFT = libft.a
 
 SRCS = main.c utils.c vector_utils.c raytracing.c intersection.c \
 	   vector_utils2.c node_t_obj_create.c node_t_obj_utils.c init_scene.c \
-	   vector_utils3.c parsing.c
+	   vector_utils3.c parsing.c init_elements.c utils2.c
 
 OBJ = $(SRCS:.c=.o)
 
