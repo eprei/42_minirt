@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/13 10:13:18 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:07:07 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,6 @@ void		init_l_amb(t_scene *scene, double intensity, t_color color);
 t_vector	cross(t_vector vect_a, t_vector vect_b);
 int			inter_plane(const t_ray d, const t_obj plane, t_ret_ray *ret);
 void		init_scene(t_scene *scene);
+int			inter_cylinder(const t_ray d, const t_obj s, t_ret_ray *ret);
 
 #endif

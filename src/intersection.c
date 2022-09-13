@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/12 14:34:29 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:07:24 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,46 @@ int	inter_plane(const t_ray d, const t_obj plane, t_ret_ray *ret)
 		{
 			ret->t = t;
 			ret->p = op_plus(d.o, op_mult(ret->t, d.d));
-			ret->n = op_minus(ret->p, plane.pos);
+			ret->n = plane.orientation;
 			return (1);
 		}
 	}
 	return (0);
+}
+
+int	inter_cylinder(const t_ray ray, const t_obj c, t_ret_ray *ret)
+{
+	t_inter_sp	s_inter;
+
+	t_vector	u;
+	t_vector	v;
+
+	u = cross(ray.d, c.orientation);
+	v = cross(op_minus(ray.o, c.pos), c.orientation);
+	s_inter.a = op_dot(u, u);
+	s_inter.b = 2 * op_dot(u, v);
+	s_inter.c = op_dot(v, v) - (c.diameter * c.diameter);
+	s_inter.delta = s_inter.b * s_inter.b - 4 * s_inter.a * s_inter.c;
+	if (s_inter.delta < 0)
+		return (0);
+	s_inter.t2 = (-s_inter.b + sqrt(s_inter.delta)) / (2 * s_inter.a);
+	if (s_inter.t2 < 0)
+		return (0);
+	s_inter.t1 = (-s_inter.b - sqrt(s_inter.delta)) / (2 * s_inter.a);
+	if (s_inter.t1 > 0)
+		ret->t = s_inter.t1;
+	else
+		ret->t = s_inter.t2;
+	ret->p = op_plus(ray.o, op_mult(ret->t, ray.d));
+
+	t_vector	a = ret->p;
+	t_vector	be = c.orientation;
+	t_vector	ce = cross(a, be);
+	t_vector	n = cross(ce, be);
+
+	ret->n = n;
+
+	// ret->n = op_minus(ret->p, c.pos);
+	normalize(&ret->n);
+	return (1);
 }

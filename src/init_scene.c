@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/13 10:35:11 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:30:24 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,25 @@ void	init_scene(t_scene *scene)
 	double		l_amb_intensity;
 
 /******************* RESOLUTION **************************/
-	scene->h = 400;
-	scene->w = 400;
+	scene->h = 500;
+	scene->w = 500;
 /*********************** CAMERA **************************/
 	cam_fov = 60;
-	cam_pos = init_vector(70, 0, -55);
-	cam_orient = init_vector(-1, -0.2, 0);
+	cam_pos = init_vector(0, 0, 80);
+	cam_orient = init_vector(0, 0, -1);
 	init_cam(scene, cam_pos, cam_orient, cam_fov);
 /*********************** LUM AMBIENT *********************/
 	l_amb_intensity = 0.2;
 	l_amb_color = init_vec_col(255, 255, 255);
 	init_l_amb(scene, l_amb_intensity, l_amb_color);
 /****************** LIGHT POINT **************************/
-	scene->p_light.pos = init_vector(25, 60, -65);
-	scene->p_light.intensity = 500000;
+	scene->p_light.pos = init_vector(40, 70, 20);
+	scene->p_light.intensity = 1000000;
 /****************** OBJ_0 PLAN **************************/
 	start_t_obj(scene);
 	scene->obj_0->type = PLAN;
 	scene->obj_0->pos = init_vector(0, -20, 0);
-	scene->obj_0->orientation = init_vector(0, 1, 0);
+	scene->obj_0->orientation = init_vector(0.5, 1, 0);
 	scene->obj_0->color = init_vec_col(200, 60, 60);
 /****************** OBJ_1 SPHERE ************************/
 	add_t_obj(scene);
@@ -74,4 +74,12 @@ void	init_scene(t_scene *scene)
 	scene->obj_0->next->next->pos = init_vector(30, -10, -60);
 	scene->obj_0->next->next->diameter = 10;
 	scene->obj_0->next->next->color = init_vec_col(30, 30, 200);
+/**************** OBJ_2 CYLINDRE **************************/
+	add_t_obj(scene);
+	scene->obj_0->next->next->next->type = CYLINDER;
+	scene->obj_0->next->next->next->pos = init_vector(-40, 3, -60);
+	scene->obj_0->next->next->next->orientation = init_vector(0, 1, 0);
+	scene->obj_0->next->next->next->diameter = 20;
+	scene->obj_0->next->next->next->height = 6;
+	scene->obj_0->next->next->next->color = init_vec_col(150, 80, 10);
 }
