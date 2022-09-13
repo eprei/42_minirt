@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/13 10:28:25 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:07:21 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@ int	exit_button(void)
 	exit(0);
 }
 
+int	parse_file(char *file, t_scene *scene)
+{
+	int		fd;
+	char	*a;
+
+	a = ft_strrchr(file, '.');
+	if (a == NULL || ft_strncmp(a, ".rt", 3) != 0)
+		ft_close("Invalid mapfile extension! Mandatory: .rt", scene, 0);
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		ft_close("Invalid file !", scene, 0);
+	read_file(fd, scene);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	int		res;
@@ -25,6 +40,10 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
+	scene.obj_0 = NULL;
+	if (argc != 2)
+		ft_close("Invalid number of arguments ! Mandatory : one file", &scene, 0);
+	res = parse_file(argv[1], &scene);
 	init_scene(&scene);
 	scene.mlx_ptr = mlx_init();
 	if (scene.mlx_ptr == NULL)

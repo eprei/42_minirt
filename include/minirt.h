@@ -125,6 +125,7 @@ typedef struct s_trace
 /* *****************************  vector_utils.c  ****************************/
 
 void		init_node(t_obj *new_node);
+void		read_file(int fd, t_scene *scene);
 t_obj		*start_t_obj(t_scene *scene);
 void		add_t_obj(t_scene *scene);
 int			count_objs(t_scene *scene);
@@ -152,5 +153,7 @@ void		init_l_amb(t_scene *scene, double intensity, t_color color);
 t_vector	cross(t_vector vect_a, t_vector vect_b);
 int			inter_plane(const t_ray d, const t_obj plane, t_ret_ray *ret);
 void		init_scene(t_scene *scene);
+void		ft_close(char *s, t_scene *scene, int level);
+
 
 #endif

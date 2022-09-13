@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:34:28 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/12 12:52:01 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:10:35 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	del_content(void *content)
 {
 	(void)content;
-	init_node(content);
+//	init_node(content);
 }
 
 void	rt_lstclear(t_obj **objs, void (*del)(void *))
@@ -23,9 +23,9 @@ void	rt_lstclear(t_obj **objs, void (*del)(void *))
 	t_obj	*ptr;
 	t_obj	*tmp;
 
-	ptr = *objs;
-	if (del == 0 || objs == 0)
+		if (del == 0 || objs == 0)
 		return ;
+	ptr = *objs;
 	while (ptr != 0)
 	{
 		tmp = ptr->next;
@@ -40,8 +40,9 @@ void	ft_close(char *s, t_scene *scene, int level)
 {
 	(void)s;
 	(void)level;
-	write(1, "You have choosen to close the window !\n", 39);
-	rt_lstclear(&scene->obj_0, &del_content);		
+	ft_printf("%s\n", s);
+	if (scene->obj_0)
+		rt_lstclear(&scene->obj_0, &del_content);		
 	exit (0);
 }
 
