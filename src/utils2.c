@@ -6,45 +6,11 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:17:27 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/14 15:36:22 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/14 15:46:00 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
-
-double	stod(char *s)
-{
-	double	rez;
-	double	fact;
-	int		point;
-	int		d;
-
-	rez = 0;
-	fact = 1;
-	if (*s == '-')
-	{
-		s++;
-		fact = -1;
-	}
-	while (*s)
-	{
-		if (*s == '.')
-		{
-			point = 1;
-			s++;
-			continue;
-		}
-		d = *s - '0';
-		if (d <= 0 && d <= 9)
-		{
-			if (point)
-				fact /= 10.0f;
-			rez = rez * 10.0f + (float)d;
-		}
-		s++;
-	}
-	return (rez * fact);
-}
 
 int	check_ratio(double min, double max, double nb)
 {
@@ -52,7 +18,6 @@ int	check_ratio(double min, double max, double nb)
 		return (1);
 	return (0);
 }
-
 
 int	ft_atoi_rt(char *str, t_scene *scene, double min, double max)
 {
@@ -86,7 +51,7 @@ int	ft_atoi_rt(char *str, t_scene *scene, double min, double max)
 double	atod(char *l, t_scene *scene, double min, double max)
 {
 	double	res;
-	char *dec;
+	char	*dec;
 
 	(void)scene;
 	res = ft_atoi(l);
@@ -107,15 +72,15 @@ t_color	atod_vc(char *l, t_scene *scene, double min, double max)
 	i = 0;
 	res = ft_split(l, ',');
 	if (tablen(res) != 3)
-    	ft_close("Color arguments not correct\n", scene, 5);
+		ft_close("Color arguments not correct\n", scene, 5);
 	while (res[i])
 	{
 		rgb[i] = atod(res[i], scene, min, max);
 		if (rgb[i] < 0 || rgb[i] > 255)
-        	ft_close("Color is not correct\n", scene, 5);
-		i++;	
+			ft_close("Color is not correct\n", scene, 5);
+		i++;
 	}
 	tab_free(res);
-	free(res);		
-	return(init_vec_col(rgb[0], rgb[1], rgb[2]));
+	free(res);
+	return (init_vec_col(rgb[0], rgb[1], rgb[2]));
 }
