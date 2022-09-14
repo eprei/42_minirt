@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:03:58 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/06 13:46:07 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:09:31 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,14 @@ void	tab_free(char **tab)
 		tab[i] = NULL;
 		i++;
 	}
+}
+
+int	tablen(char **t)
+{
+	int	i;
+
+	i = 0;
+	while (t && t[i])
+		i++;
+	return (i);
 }

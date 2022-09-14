@@ -6,13 +6,12 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/12 14:34:29 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:07:59 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
 
-//int	inter_sphere(const t_ray d, const t_obj  s, t_vector *p, t_vector *n)
 int	inter_sphere(const t_ray d, const t_obj s, t_ret_ray *ret)
 {
 	t_inter_sp	s_inter;

@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/14 12:26:43 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:59:28 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,4 +166,10 @@ int			ft_atoi_rt(char *str, t_scene *scene, double min, double max);
 void		tab_free(char **tab);
 double		stod(char *l);
 int			check_input_p_p(char *s);
+int			check_input_col(char *s);
+int			tablen(char **t);
+
+//temp
+void    print_tobj(t_obj *obj);
+
 #endif

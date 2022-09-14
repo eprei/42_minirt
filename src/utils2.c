@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:17:27 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/14 13:40:22 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/14 15:36:22 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,11 @@ double	atod(char *l, t_scene *scene, double min, double max)
 
 	(void)scene;
 	res = ft_atoi(l);
-	//if (res < min && res > max)
-      //  ft_close("Ambiant light intensity not correct\n", scene, 5);
 	dec = ft_strchr(l, '.');
-	if (++dec)
+	if (dec && ++dec)
 		res += ft_atoi_rt(dec, scene, min, 1E9) / pow(10, ft_strlen(dec));
 	if (res < min || res > max)
-        ft_close("Value is not correct\n", scene, 5);
+		ft_close("Value is not correct\n", scene, 5);
 	return (res);
 }
 
@@ -108,14 +106,14 @@ t_color	atod_vc(char *l, t_scene *scene, double min, double max)
 
 	i = 0;
 	res = ft_split(l, ',');
+	if (tablen(res) != 3)
+    	ft_close("Color arguments not correct\n", scene, 5);
 	while (res[i])
 	{
 		rgb[i] = atod(res[i], scene, min, max);
-		if (rgb[i] < 0)
-		{
-			rgb[0] = -1;
-			i++;
-		}
+		if (rgb[i] < 0 || rgb[i] > 255)
+        	ft_close("Color is not correct\n", scene, 5);
+		i++;	
 	}
 	tab_free(res);
 	free(res);		
