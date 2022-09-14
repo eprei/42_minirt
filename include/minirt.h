@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/13 17:04:02 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/14 12:26:43 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,10 @@ void		init_sphere(char **line, t_scene *scene);
 void		init_plan(char **line, t_scene *scene);
 void		init_cyl(char **line, t_scene *scene);
 int			check_ratio(double min, double max, double nb);
-double		atod(char *l);
-t_color		atod_vc(char *l);
-int			ft_atoi_rt(char *str);
+double		atod(char *l, t_scene *scene, double min, double max);
+t_color		atod_vc(char *l, t_scene *scene, double min, double max);
+int			ft_atoi_rt(char *str, t_scene *scene, double min, double max);
 void		tab_free(char **tab);
+double		stod(char *l);
+int			check_input_p_p(char *s);
 #endif

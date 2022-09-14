@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:22:34 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/13 17:10:51 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/14 12:57:25 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,21 @@ void	init_a_light(char **line, t_scene *scene)
 	double res;
 
 	scene->l_amb.type = 0;
-	res = atod(line[1]); 
+	if (!check_input_p_p(line[1]))
+		ft_close("Ambiant light intensity not correct\n", scene, 5);
+	res = atod(line[1], scene, 0, 1);
+	printf("A l: %f\n", res);
+/*	res = stod(line[1]); 
 	if ((check_ratio(0, 1, res)))
 	{
 		scene->l_amb.intensity = res;
-		scene->l_amb.color = atod_vc(line[3]);
+		scene->l_amb.color = atod_vc(line[3], scene, 0, 255);
 		if (scene->l_amb.color.r == -1)
-			ft_close("Ambiant light color not in range 0 - 255\n", scene, 5);
+			ft_close("Ambiant light color not correct\n", scene, 5);
 	}
 	else
-		ft_close("Ambiant light intensity not in range 0 - 1\n", scene, 5);
-}
+		ft_close("Ambiant light intensity not correct\n", scene, 5);
+*/}
 
 void	parse_elem(char **line, t_scene *scene)
 {
