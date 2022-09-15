@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:17:27 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/14 15:46:00 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/15 11:56:15 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,18 @@ int	ft_atoi_rt(char *str, t_scene *scene, double min, double max)
 double	atod(char *l, t_scene *scene, double min, double max)
 {
 	double	res;
+	double	fac;
 	char	*dec;
 
-	(void)scene;
+//	(void)scene;
+	fac = 1;
+	if (strncmp(l, "-0.", 3) == 0)
+		fac = -1;
 	res = ft_atoi(l);
 	dec = ft_strchr(l, '.');
 	if (dec && ++dec)
 		res += ft_atoi_rt(dec, scene, min, 1E9) / pow(10, ft_strlen(dec));
+	res = res * fac;
 	if (res < min || res > max)
 		ft_close("Value is not correct\n", scene, 5);
 	return (res);
@@ -76,11 +81,33 @@ t_color	atod_vc(char *l, t_scene *scene, double min, double max)
 	while (res[i])
 	{
 		rgb[i] = atod(res[i], scene, min, max);
-		if (rgb[i] < 0 || rgb[i] > 255)
+/*		if (rgb[i] < 0 || rgb[i] > 255)
 			ft_close("Color is not correct\n", scene, 5);
-		i++;
+*/		i++;
 	}
 	tab_free(res);
 	free(res);
 	return (init_vec_col(rgb[0], rgb[1], rgb[2]));
+}
+
+t_vector	atod_v(char *l, t_scene *scene, double min, double max)
+{
+	char	**res;
+	double	vec[3];
+	int		i;
+
+	i = 0;
+	res = ft_split(l, ',');
+	if (tablen(res) != 3)
+		ft_close("Color arguments not correct\n", scene, 5);
+	while (res[i])
+	{
+		vec[i] = atod(res[i], scene, min, max);
+/*		if (vec[i] < 0 || vec[i] > 255)
+			ft_close("Color is not correct\n", scene, 5);
+*/		i++;
+	}
+	tab_free(res);
+	free(res);
+	return (init_vector(vec[0], vec[1], vec[2]));
 }

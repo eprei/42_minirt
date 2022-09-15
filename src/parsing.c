@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:22:34 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/14 15:35:37 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:00:53 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,6 @@ void	parse_elem(char **line, t_scene *scene)
 		ft_close("Unknown element in the file !\n", scene, 5);
 }
 
-/*void	parse_obj(char **line, t_scene *scene)
-{
-	if (ft_strncmp(line[0], "sp", 3) == 0)
-		init_sphere(line, scene);
-	else if (ft_strncmp(line[0], "pl", 3) == 0)
-		init_plan(line, scene);
-	else if (ft_strncmp(line[0], "cy", 3) == 0)
-		init_cyl(line, scene);
-	else
-		ft_close("Unknown element in the file !\n", scene, 5);
-}*/
-
 void	read_file(int fd, t_scene *scene)
 {
 	char	*l;
@@ -70,7 +58,7 @@ void	read_file(int fd, t_scene *scene)
 	{
 		if (n > 1)
 		{
-			printf("-- %s", l);
+			printf("-- %s\n", l);
 			line = ft_split(l, ' ');
 //			if (line && ft_strlen(line[0]) == 1)
 			if (line)

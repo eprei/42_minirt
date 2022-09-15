@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/14 14:59:28 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:14:21 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_cam
 	t_vector	orient;
 	t_vector	up;
 	t_vector	right;
-	double		fov;
+	double		fov;// int ??
 }	t_cam;
 
 typedef struct s_obj
@@ -163,13 +163,15 @@ int			check_ratio(double min, double max, double nb);
 double		atod(char *l, t_scene *scene, double min, double max);
 t_color		atod_vc(char *l, t_scene *scene, double min, double max);
 int			ft_atoi_rt(char *str, t_scene *scene, double min, double max);
+t_vector    atod_v(char *l, t_scene *scene, double min, double max);
 void		tab_free(char **tab);
 double		stod(char *l);
 int			check_input_p_p(char *s);
 int			check_input_col(char *s);
+int check_input_pos(char *s);
 int			tablen(char **t);
 
 //temp
 void    print_tobj(t_obj *obj);
-
+void    print_tcam(t_cam *obj);
 #endif
