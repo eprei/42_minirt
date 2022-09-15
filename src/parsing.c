@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:22:34 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/15 10:00:53 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/15 14:58:11 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_a_light(char **line, t_scene *scene)
 		ft_close("Ambiant light arguments not correct\n", scene, 5);
 	scene->l_amb.type = 0;
 	if (!check_input_p_p(line[1]))
-		ft_close("Ambiant light intensity not correct\n", scene, 5);
+		ft_close("Ambiant light ratio not correct\n", scene, 5);
 	scene->l_amb.intensity = atod(line[1], scene, 0, 1);
 	if (!check_input_col(line[2]))
 		ft_close("Ambiant light color not correct\n", scene, 5);

@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 10:25:09 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/12 12:50:33 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:12:59 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,21 @@ void	add_t_obj(t_scene *scene)
 	}
 }
 
-int	count_objs(t_scene *scene)
+t_obj	*get_curr_cmd(t_scene *scene)
 {
 	t_obj	*curr;
-	int		i;
 
-	i = 0;
 	curr = scene->obj_0;
-	while (curr != NULL)
-	{
-		curr = curr->next;
-		i++;
-	}
-	return (i);
+	while (curr->next != NULL)
+			curr = curr->next;
+	return (curr);
+}
+
+t_obj   *create_obj(t_scene *scene)
+{
+    if (scene->obj_0  == NULL)
+        start_t_obj(scene);
+    else
+        add_t_obj(scene);
+	return (get_curr_cmd(scene));
 }

@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/15 10:14:21 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:12:42 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,9 +168,10 @@ void		tab_free(char **tab);
 double		stod(char *l);
 int			check_input_p_p(char *s);
 int			check_input_col(char *s);
-int check_input_pos(char *s);
+int			check_input_pos(char *s);
 int			tablen(char **t);
-
+t_obj		*get_curr_cmd(t_scene *scene);
+t_obj		*create_obj(t_scene *scene);
 //temp
 void    print_tobj(t_obj *obj);
 void    print_tcam(t_cam *obj);
