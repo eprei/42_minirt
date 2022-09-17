@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/17 13:05:35 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:07:12 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	inter_plane(const t_ray d, const t_obj plane, t_ret_ray *ret)
 	return (FALSE);
 }
 
-int	verif_inside_cylindre(const t_obj c, t_ret_ray *ret)
+int	verif_inside_cylindre_body(const t_obj c, t_ret_ray *ret)
 {
 	float		hit_point_to_cyl_center;
 	float		cyl_center_to_high_of_hit_point;
@@ -85,28 +85,52 @@ int	verif_inside_cylindre(const t_obj c, t_ret_ray *ret)
 		return (FALSE);
 }
 
+int	verif_inside_cylindre_cap(t_ret_ray ret_local, t_obj c, t_obj cylinder_cap)
+{
+	float	distance_to_cap_center;
 
+	distance_to_cap_center = distance_between_two_vectors(ret_local.p, cylinder_cap.pos);
+	if (distance_to_cap_center <= c.diameter)
+		return (TRUE);
+	else
+		return (FALSE);
+}
 
-int	inter_cylinder(const t_ray ray, const t_obj c, t_ret_ray *ret)
+int	inter_cylinder(const t_ray ray, t_obj c, t_ret_ray *ret)
 {
 	t_inter_sp	s_inter;
-	// t_ret_ray	ret_local;
 	t_vector	u;
 	t_vector	v;
+	t_ret_ray	ret_local;
+	ret->t = 1E9;
+	int			intersect_status;
 
-	// t_vector	cyl_top_center;
-	// t_vector	cyl_bottom_center;
-	// t_obj		plane_to_intersect;
+	intersect_status = FALSE;
 
-	// cyl_top_center = op_mult(c.height / 2, c.orientation);
-	// cyl_top_center = op_plus(cyl_top_center, c.pos);
-	// cyl_bottom_center = op_mult(c.height / -2, c.orientation);
-	// cyl_bottom_center = op_plus(cyl_top_center, c.pos);
-	// plane_to_intersect.pos = cyl_top_center;
-	// plane_to_intersect.orientation = c.orientation;
-	// if (inter_plane(ray, plane_to_intersect, &ret_local))
-	// 	*ret = ret_local;
+	t_vector	cyl_top_center;
+	t_vector	cyl_bottom_center;
+	t_obj		cylinder_cap;
 
+	normalize(&c.orientation);
+	cyl_top_center = op_mult(c.height * 0.5, c.orientation);
+	cyl_top_center = op_plus(cyl_top_center, c.pos);
+
+	cyl_bottom_center = op_mult(c.height * -0.5, c.orientation);
+	cyl_bottom_center = op_plus(cyl_bottom_center, c.pos);
+
+	cylinder_cap.pos = cyl_top_center;
+	cylinder_cap.orientation = c.orientation;
+	if (inter_plane(ray, cylinder_cap, &ret_local) && verif_inside_cylindre_cap(ret_local, c, cylinder_cap))
+	{
+		*ret = ret_local;
+		intersect_status = TRUE;
+	}
+	cylinder_cap.pos = cyl_bottom_center;
+	if (inter_plane(ray, cylinder_cap, &ret_local) && verif_inside_cylindre_cap(ret_local, c, cylinder_cap) && ret_local.t < ret->t)
+	{
+		*ret = ret_local;
+		intersect_status = TRUE;
+	}
 	u = cross(ray.d, c.orientation);
 	v = cross(op_minus(ray.o, c.pos), c.orientation);
 	s_inter.a = op_dot(u, u);
@@ -114,17 +138,19 @@ int	inter_cylinder(const t_ray ray, const t_obj c, t_ret_ray *ret)
 	s_inter.c = op_dot(v, v) - (c.diameter * c.diameter);
 	s_inter.delta = s_inter.b * s_inter.b - 4 * s_inter.a * s_inter.c;
 	if (s_inter.delta < 0)
-		return (FALSE);
+		return (intersect_status);
 	s_inter.t2 = (-s_inter.b + sqrt(s_inter.delta)) / (2 * s_inter.a);
 	if (s_inter.t2 < 0)
-		return (FALSE);
+		return (intersect_status);
 	s_inter.t1 = (-s_inter.b - sqrt(s_inter.delta)) / (2 * s_inter.a);
 	if (s_inter.t1 > 0)
-		ret->t = s_inter.t1;
+		ret_local.t = s_inter.t1;
 	else
-		ret->t = s_inter.t2;
-	ret->p = op_plus(ray.o, op_mult(ret->t, ray.d));
-	if (verif_inside_cylindre(c, ret) == FALSE)
-		return (FALSE);
+		ret_local.t = s_inter.t2;
+	ret_local.p = op_plus(ray.o, op_mult(ret_local.t, ray.d));
+	if (verif_inside_cylindre_body(c, &ret_local) == FALSE)
+		return (intersect_status);
+	if (ret_local.t < ret->t)
+		*ret = ret_local;
 	return (TRUE);
 }

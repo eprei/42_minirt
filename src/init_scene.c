@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/17 10:59:10 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:18:52 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	init_scene(t_scene *scene)
 	double		l_amb_intensity;
 
 /******************* RESOLUTION **************************/
-	scene->h = 700;
-	scene->w = 700;
+	scene->h = 500;
+	scene->w = 500;
 /*********************** CAMERA **************************/
-	cam_fov = 60;
-	cam_pos = init_vector(-20, 20, 40);
-	cam_orient = init_vector(0, 0, -1);
+	cam_fov = 40;
+	cam_pos = init_vector(100, -15, -40);
+	cam_orient = init_vector(-1, 0.1, -0.2);
 	init_cam(scene, cam_pos, cam_orient, cam_fov);
 /*********************** LUM AMBIENT *********************/
 	l_amb_intensity = 0.2;
@@ -60,7 +60,7 @@ void	init_scene(t_scene *scene)
 	start_t_obj(scene);
 	scene->obj_0->type = PLAN;
 	scene->obj_0->pos = init_vector(0, -20, 0);
-	scene->obj_0->orientation = init_vector(0.5, 1, 0);
+	scene->obj_0->orientation = init_vector(0, 1, 0);
 	scene->obj_0->color = init_vec_col(150, 150, 150);
 /****************** OBJ_1 SPHERE ************************/
 	add_t_obj(scene);
@@ -77,9 +77,9 @@ void	init_scene(t_scene *scene)
 /**************** OBJ_2 CYLINDRE **************************/
 	add_t_obj(scene);
 	scene->obj_0->next->next->next->type = CYLINDER;
-	scene->obj_0->next->next->next->pos = init_vector(-40, 25, -60);
-	scene->obj_0->next->next->next->orientation = init_vector(0, 1, -1);
-	scene->obj_0->next->next->next->diameter = 20;
-	scene->obj_0->next->next->next->height = 30;
+	scene->obj_0->next->next->next->pos = init_vector(0, 0, -55);
+	scene->obj_0->next->next->next->orientation = init_vector(1, 0, 0);
+	scene->obj_0->next->next->next->diameter = 5;
+	scene->obj_0->next->next->next->height = 100;
 	scene->obj_0->next->next->next->color = init_vec_col(200, 70, 70);
 }
