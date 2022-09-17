@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/13 12:07:07 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/17 11:03:10 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define HEIGHT 1024
 # define MY_PI 3.1415
 # define ESC_KEY 53
+# define FALSE 0
+# define TRUE 1
 
 typedef struct s_vector
 {
@@ -153,5 +155,7 @@ t_vector	cross(t_vector vect_a, t_vector vect_b);
 int			inter_plane(const t_ray d, const t_obj plane, t_ret_ray *ret);
 void		init_scene(t_scene *scene);
 int			inter_cylinder(const t_ray d, const t_obj s, t_ret_ray *ret);
+float		vect_len(t_vector v);
+float		distance_between_two_vectors(t_vector a, t_vector b);
 
 #endif

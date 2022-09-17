@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:25:31 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/13 15:33:14 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/17 09:40:35 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
-#include <stdio.h>
 
 void	update_ret(int *res, t_ret_ray *ret, t_obj current, t_ret_ray loc_ret)
 {
@@ -38,11 +37,14 @@ int	inter_obj(t_ray s_r1, t_scene *scene, t_ret_ray *ret)
 		current = scene->obj_0;
 		while (current != NULL)
 		{
-			if (current->type == SPHERE && inter_sphere(s_r1, *current, &loc_ret))
+			if (current->type == SPHERE && \
+			inter_sphere(s_r1, *current, &loc_ret))
 				update_ret(&res, ret, *current, loc_ret);
-			if (current->type == PLAN && inter_plane(s_r1, *current, &loc_ret))
+			if (current->type == PLAN && \
+			inter_plane(s_r1, *current, &loc_ret))
 				update_ret(&res, ret, *current, loc_ret);
-			if (current->type == CYLINDER && inter_cylinder(s_r1, *current, &loc_ret))
+			if (current->type == CYLINDER && \
+			inter_cylinder(s_r1, *current, &loc_ret))
 				update_ret(&res, ret, *current, loc_ret);
 			current = current->next;
 		}

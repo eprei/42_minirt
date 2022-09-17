@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:57:51 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/13 10:13:06 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/17 11:07:31 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,19 @@ t_vector	cross(t_vector vect_a, t_vector vect_b)
 	res.y = vect_a.z * vect_b.x - vect_a.x * vect_b.z;
 	res.z = vect_a.x * vect_b.y - vect_a.y * vect_b.x;
 	return (res);
+}
+
+float	vect_len(t_vector v)
+{
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
+float	distance_between_two_vectors(t_vector a, t_vector b)
+{
+	t_vector	sustraction;
+	float		distance;
+
+	sustraction = op_minus(a, b);
+	distance = vect_len(sustraction);
+	return (distance);
 }
