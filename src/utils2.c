@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:17:27 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 11:10:56 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:15:10 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ double	atod(char *l, t_scene *scene, double min, double max)
 		res += ft_atoi_rt(dec, scene, min, 1E9) / pow(10, ft_strlen(dec));
 	res = res * fac;
 	if (res < min || res > max)
-		ft_close("Value is not correct\n", scene, 5);
+		ft_close("Value is not correct", scene, 5);
 	return (res);
 }
 
@@ -76,7 +76,7 @@ t_color	atod_vc(char *l, t_scene *scene, double min, double max)
 	i = 0;
 	res = ft_split(l, ',');
 	if (tablen(res) != 3)
-		ft_close("Color arguments not correct\n", scene, 5);
+		ft_close("Color arguments not correct", scene, 5);
 	while (res[i])
 	{
 		rgb[i] = atod(res[i], scene, min, max);
@@ -96,7 +96,7 @@ t_vector	atod_v(char *l, t_scene *scene, double min, double max)
 	i = 0;
 	res = ft_split(l, ',');
 	if (tablen(res) != 3)
-		ft_close("Color arguments not correct\n", scene, 5);
+		ft_close("Color arguments not correct", scene, 5);
 	while (res[i])
 	{
 		vec[i] = atod(res[i], scene, min, max);

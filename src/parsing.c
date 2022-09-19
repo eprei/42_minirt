@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:22:34 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 13:22:45 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:07:43 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	init_a_light(t_scene *scene)
 {
+	if (scene->l_amb.type != -1)
+		ft_close("Ambiant light already configured\n", scene, 5);
 	if (tablen(scene->line) != 3)
 		ft_close("Ambiant light arguments not correct\n", scene, 5);
 	scene->l_amb.type = 0;
@@ -59,11 +61,12 @@ void	read_file(t_scene *scene)
 			scene->line = ft_split(scene->l, ' ');
 			if (scene->line)
 				parse_elem(scene);
-			else
-			{
-				ft_close("Unknown element in the file !\n", scene, 5);
-			}
+		//	else
+		//		ft_close("Unknown element in the file !\n", scene, 5);
+			tab_free_full(&scene->line);
 		}
+		free(scene->l);
+
 		scene->l = get_next_line(scene->fd);
 		n = ft_strlen(scene->l);
 		if (n > 0 && scene->l[n - 1] == '\n')

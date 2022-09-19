@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/19 13:56:11 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:04:41 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,12 @@ int	parse_file(char *file, t_scene *scene)
 	scene->fd = open(file, O_RDONLY);
 	if (scene->fd == -1)
 		ft_close("Invalid file !", scene, 0);
-	//scene->cam.type = -1;
+	scene->cam.fov = -1;
+	scene->l_amb.type = -1;
+	scene->p_light.type = -1;
 	read_file(scene);
+	scene->h = 100;
+	scene->w = 100;
 	return (0);
 }
 
