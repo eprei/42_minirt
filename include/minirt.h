@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/15 15:12:42 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/19 10:54:18 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_cam
 	t_vector	orient;
 	t_vector	up;
 	t_vector	right;
-	double		fov;// int ??
+	double		fov;
 }	t_cam;
 
 typedef struct s_obj
@@ -73,8 +73,11 @@ typedef struct s_scene
 {
 	int		h;
 	int		w;
+	int		fd;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	char	*l;
+	char	**line;
 	t_cam	cam;
 	t_obj	l_amb;
 	t_obj	p_light;
@@ -90,7 +93,6 @@ typedef struct s_inter_sp
 	double	delta;
 	double	t1;
 	double	t2;
-	double	t;// pas utile depuis multisphere ??
 }	t_inter_sp;
 
 typedef struct s_ray
@@ -117,15 +119,13 @@ typedef struct s_trace
 	t_ray		s_rli;
 	t_vector	p;
 	t_vector	n;
-	//t_vector	p_light;
-	//t_vector	n_light;
 	t_vector	tmp;
 }	t_trace;
 
 /* *****************************  vector_utils.c  ****************************/
 
 void		init_node(t_obj *new_node);
-void		read_file(int fd, t_scene *scene);
+void		read_file(t_scene *scene);
 t_obj		*start_t_obj(t_scene *scene);
 void		add_t_obj(t_scene *scene);
 int			count_objs(t_scene *scene);
@@ -154,16 +154,16 @@ t_vector	cross(t_vector vect_a, t_vector vect_b);
 int			inter_plane(const t_ray d, const t_obj plane, t_ret_ray *ret);
 void		init_scene(t_scene *scene);
 void		ft_close(char *s, t_scene *scene, int level);
-void		init_camera(char **line, t_scene *scene);
-void		init_light(char **line, t_scene *scene);
-void		init_sphere(char **line, t_scene *scene);
-void		init_plan(char **line, t_scene *scene);
-void		init_cyl(char **line, t_scene *scene);
+void		init_camera(t_scene *scene);
+void		init_light(t_scene *scene);
+void		init_sphere(t_scene *scene);
+void		init_plan(t_scene *scene);
+void		init_cyl(t_scene *scene);
 int			check_ratio(double min, double max, double nb);
 double		atod(char *l, t_scene *scene, double min, double max);
 t_color		atod_vc(char *l, t_scene *scene, double min, double max);
 int			ft_atoi_rt(char *str, t_scene *scene, double min, double max);
-t_vector    atod_v(char *l, t_scene *scene, double min, double max);
+t_vector	atod_v(char *l, t_scene *scene, double min, double max);
 void		tab_free(char **tab);
 double		stod(char *l);
 int			check_input_p_p(char *s);
@@ -173,6 +173,6 @@ int			tablen(char **t);
 t_obj		*get_curr_cmd(t_scene *scene);
 t_obj		*create_obj(t_scene *scene);
 //temp
-void    print_tobj(t_obj *obj);
-void    print_tcam(t_cam *obj);
+void		print_tobj(t_obj *obj);
+void		print_tcam(t_cam *obj);
 #endif

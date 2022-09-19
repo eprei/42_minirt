@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:17:27 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/15 11:56:15 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/19 11:10:56 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ double	atod(char *l, t_scene *scene, double min, double max)
 	double	fac;
 	char	*dec;
 
-//	(void)scene;
 	fac = 1;
 	if (strncmp(l, "-0.", 3) == 0)
 		fac = -1;
@@ -81,9 +80,7 @@ t_color	atod_vc(char *l, t_scene *scene, double min, double max)
 	while (res[i])
 	{
 		rgb[i] = atod(res[i], scene, min, max);
-/*		if (rgb[i] < 0 || rgb[i] > 255)
-			ft_close("Color is not correct\n", scene, 5);
-*/		i++;
+		i++;
 	}
 	tab_free(res);
 	free(res);
@@ -103,9 +100,7 @@ t_vector	atod_v(char *l, t_scene *scene, double min, double max)
 	while (res[i])
 	{
 		vec[i] = atod(res[i], scene, min, max);
-/*		if (vec[i] < 0 || vec[i] > 255)
-			ft_close("Color is not correct\n", scene, 5);
-*/		i++;
+		i++;
 	}
 	tab_free(res);
 	free(res);
