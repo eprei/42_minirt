@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:25:31 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 12:18:37 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:50:35 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,31 @@ void	add_ambience_light(t_trace *s_t1, t_ret_ray ret, t_scene scene)
 	* scene.l_amb.intensity * k);
 }
 
+void	calcul_shadow(t_trace *s_t1, t_ret_ray *ret, t_scene *scene)
+{
+	t_ret_ray	ret_shadow;
+	int			is_shadow;
+	double		d_light_2;
+
+	s_t1->s_rli.o = op_plus(ret->p, op_mult(0.01, ret->n));
+	s_t1->tmp = op_minus(scene->p_light.pos, ret->p);
+	normalize(&s_t1->tmp);
+	s_t1->s_rli.d = s_t1->tmp;
+	d_light_2 = get_norm2(op_minus(scene->p_light.pos, ret->p));
+	is_shadow = inter_obj(s_t1->s_rli, scene, &ret_shadow);
+	if (is_shadow && (ret_shadow.t * ret_shadow.t < d_light_2))
+			s_t1->intensite_pixel = init_vector(0, 0, 0);
+	else
+		s_t1->intensite_pixel = op_mult((scene->p_light.intensity \
+		* max_v(op_dot(s_t1->tmp, ret->n)) / d_light_2), \
+		albedo(ret->col));
+	add_ambience_light(s_t1, *ret, *scene);
+}
+
 int	raytracing(t_scene *scene)
 {
 	t_trace		s_t1;
 	t_ret_ray	ret;
-	t_ret_ray	ret_shadow;
-	int			is_shadow;
-	double		d_light_2;
 
 	s_t1.i = 0;
 	s_t1.s_r1.o = scene->cam.pos;
@@ -76,24 +94,11 @@ int	raytracing(t_scene *scene)
 			s_t1.intensite_pixel = init_vector(0, 0, 0);
 			calcule_canvas(&s_t1, *scene);
 			if (inter_obj(s_t1.s_r1, scene, &ret))
-			{
-				s_t1.s_rli.o = op_plus(ret.p, op_mult(0.01, ret.n));
-				s_t1.tmp = op_minus(scene->p_light.pos, ret.p);
-				normalize(&s_t1.tmp);
-				s_t1.s_rli.d = s_t1.tmp;
-				d_light_2 = get_norm2(op_minus(scene->p_light.pos, ret.p));
-				is_shadow = inter_obj(s_t1.s_rli, scene, &ret_shadow);
-				if (is_shadow && (ret_shadow.t * ret_shadow.t < d_light_2))
-						s_t1.intensite_pixel = init_vector(0, 0, 0);
-				else
-					s_t1.intensite_pixel = op_mult((scene->p_light.intensity \
-					* max_v(op_dot(s_t1.tmp, ret.n)) / d_light_2), \
-					albedo(ret.col));
-				add_ambience_light(&s_t1, ret, *scene); // make function from 108 to 120, is_shadow and d_light_2 are locals to the new function
-			}
+				calcul_shadow(&s_t1, &ret, scene);
 			mlx_pixel_put(scene->mlx_ptr, scene->win_ptr, s_t1.j, \
 			scene->h - s_t1.i - 1, create_rgb(min_max(s_t1.intensite_pixel.x), \
-			min_max(s_t1.intensite_pixel.y), min_max(s_t1.intensite_pixel.z))); // make function
+			min_max(s_t1.intensite_pixel.y), \
+			min_max(s_t1.intensite_pixel.z)));
 			s_t1.j++;
 		}
 		s_t1.i++;
