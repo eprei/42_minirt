@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/19 11:59:05 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:20:07 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 
 	scene.obj_0 = NULL;
 	if (argc != 2)
-		ft_close("Invalid number of arguments ! Mandatory : one file", &scene, 0);
+		ft_close("Invalid number of arguments ! Mandatory : 1 file", &scene, 0);
 	res = parse_file(argv[1], &scene);
 	init_scene(&scene);
 	scene.mlx_ptr = mlx_init();

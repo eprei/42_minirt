@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 11:39:51 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:17:04 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,32 @@ int	inter_cylinder(t_ray ray, t_obj c, t_ret_ray *ret)
 	if (ret_local.t < ret->t)
 		*ret = ret_local;
 	return (TRUE);
+}
+
+int	inter_obj(t_ray s_r1, t_scene *scene, t_ret_ray *ret)
+{
+	t_obj		*current;
+	int			res;
+	t_ret_ray	loc_ret;
+
+	res = 0;
+	ret->t = 1E9;
+	if (scene != NULL && scene->obj_0 != NULL)
+	{
+		current = scene->obj_0;
+		while (current != NULL)
+		{
+			if (current->type == SPHERE && \
+			inter_sphere(s_r1, *current, &loc_ret))
+				update_ret(&res, ret, *current, loc_ret);
+			if (current->type == PLAN && \
+			inter_plane(s_r1, *current, &loc_ret))
+				update_ret(&res, ret, *current, loc_ret);
+			if (current->type == CYLINDER && \
+			inter_cylinder(s_r1, *current, &loc_ret))
+				update_ret(&res, ret, *current, loc_ret);
+			current = current->next;
+		}
+	}
+	return (res);
 }

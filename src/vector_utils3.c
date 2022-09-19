@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:57:51 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 11:33:18 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:01:13 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_color	init_vec_col(int r, int g, int b)
 	color.b = b;
 	return (color);
 }
+
 float	vect_len(t_vector v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
