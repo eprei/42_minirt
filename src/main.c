@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/19 11:41:24 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/19 11:59:05 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ int	exit_button(void)
 
 int	parse_file(char *file, t_scene *scene)
 {
-	int		fd;
 	char	*a;
 
 	a = ft_strrchr(file, '.');
 	if (a == NULL || ft_strncmp(a, ".rt", 3) != 0)
 		ft_close("Invalid mapfile extension! Mandatory: .rt", scene, 0);
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
+	scene->fd = open(file, O_RDONLY);
+	if (scene->fd == -1)
 		ft_close("Invalid file !", scene, 0);
-	read_file(fd, scene);
+	read_file(scene);
 	return (0);
 }
 
@@ -38,8 +37,6 @@ int	main(int argc, char **argv)
 	int		res;
 	t_scene	scene;
 
-	(void)argc;
-	(void)argv;
 	scene.obj_0 = NULL;
 	if (argc != 2)
 		ft_close("Invalid number of arguments ! Mandatory : one file", &scene, 0);
