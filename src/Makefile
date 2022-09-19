@@ -22,7 +22,7 @@ SRCS = main.c utils.c vector_utils.c raytracing.c intersection.c \
 
 OBJ = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 CC = gcc
 
