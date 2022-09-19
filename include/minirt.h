@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/19 12:18:26 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:11:50 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,5 +194,6 @@ int			verif_inside_cylindre_body(const t_obj c, t_ret_ray *ret);
 void		tab_free_full(char ***tab);
 void		update_ret(int *res, t_ret_ray *ret, \
 t_obj current, t_ret_ray loc_ret);
+void		invert_vector(t_vector *v);
 
 #endif

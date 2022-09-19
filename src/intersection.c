@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 11:33:18 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:11:52 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	inter_plane(const t_ray d, const t_obj plane, t_ret_ray *ret)
 			ret->t = t;
 			ret->p = op_plus(d.o, op_mult(ret->t, d.d));
 			ret->n = plane.orientation;
+			if (op_dot(ret->n, d.d) > 0)
+				invert_vector(&ret->n);
 			return (TRUE);
 		}
 	}
