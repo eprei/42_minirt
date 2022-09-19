@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:34:28 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 11:10:06 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:24:42 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,6 @@ void	ft_close(char *s, t_scene *scene, int level)
 		rt_lstclear(&scene->obj_0, &del_content);
 	exit (0);
 }
-/*
-int	count_objs(t_scene *scene) // a voir
-{
-    t_obj   *curr;
-    int     i;
-
-    i = 0;
-    curr = scene->obj_0;
-    while (curr != NULL)
-    {
-        curr = curr->next;
-        i++;
-    }
-    return (i);
-}
-*/
 
 int	deal_key(int key, t_scene *scene)
 {

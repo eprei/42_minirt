@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/19 12:18:26 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:24:57 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ void		init_node(t_obj *new_node);
 void		read_file(t_scene *scene);
 t_obj		*start_t_obj(t_scene *scene);
 void		add_t_obj(t_scene *scene);
-int			count_objs(t_scene *scene);
 void		del_content(void *content);
 void		rt_lstclear(t_obj **objs, void (*del)(void *));
 t_vector	op_plus(const t_vector c1, const t_vector c2);
