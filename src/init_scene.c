@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/17 17:18:52 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/19 10:48:43 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	init_scene(t_scene *scene)
 	scene->w = 500;
 /*********************** CAMERA **************************/
 	cam_fov = 40;
-	cam_pos = init_vector(100, -15, -40);
-	cam_orient = init_vector(-1, 0.1, -0.2);
+	cam_pos = init_vector(-40, -15, 40);
+	cam_orient = init_vector(0.5, 0.2, -1);
 	init_cam(scene, cam_pos, cam_orient, cam_fov);
 /*********************** LUM AMBIENT *********************/
 	l_amb_intensity = 0.2;
@@ -66,13 +66,13 @@ void	init_scene(t_scene *scene)
 	add_t_obj(scene);
 	scene->obj_0->next->type = SPHERE;
 	scene->obj_0->next->pos = init_vector(0, 0, -55);
-	scene->obj_0->next->diameter = 20;
+	scene->obj_0->next->diameter = 10;
 	scene->obj_0->next->color = init_vec_col(30, 240, 30);
 /**************** OBJ_2 SPHERE **************************/
 	add_t_obj(scene);
 	scene->obj_0->next->next->type = SPHERE;
 	scene->obj_0->next->next->pos = init_vector(30, -10, -60);
-	scene->obj_0->next->next->diameter = 10;
+	scene->obj_0->next->next->diameter = 20;
 	scene->obj_0->next->next->color = init_vec_col(30, 30, 200);
 /**************** OBJ_2 CYLINDRE **************************/
 	add_t_obj(scene);
