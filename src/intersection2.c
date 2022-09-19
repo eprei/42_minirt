@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 12:17:04 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:06:05 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	inter_cylinder(t_ray ray, t_obj c, t_ret_ray *ret)
 	else
 		ret_local.t = s_inter.t2;
 	ret_local.p = op_plus(ray.o, op_mult(ret_local.t, ray.d));
-	if (verif_inside_cylindre_body(c, &ret_local) == FALSE)
+	if (verif_inside_cylindre_body(ray, c, &ret_local) == FALSE)
 		return (intersect_status);
 	if (ret_local.t < ret->t)
 		*ret = ret_local;

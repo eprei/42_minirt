@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 16:11:52 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:04:33 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	inter_sphere(const t_ray d, const t_obj s, t_ret_ray *ret)
 		ret->t = s_inter.t2;
 	ret->p = op_plus(d.o, op_mult(ret->t, d.d));
 	ret->n = op_minus(ret->p, s.pos);
+	if (op_dot(ret->n, d.d) > 0)
+		invert_vector(&ret->n);
 	normalize(&ret->n);
 	return (1);
 }
@@ -66,7 +68,7 @@ int	inter_plane(const t_ray d, const t_obj plane, t_ret_ray *ret)
 	return (FALSE);
 }
 
-int	verif_inside_cylindre_body(const t_obj c, t_ret_ray *ret)
+int	verif_inside_cylindre_body(t_ray d, const t_obj c, t_ret_ray *ret)
 {
 	float		hit_point_to_cyl_center;
 	float		cyl_center_to_high_of_hit_point;
@@ -80,6 +82,8 @@ int	verif_inside_cylindre_body(const t_obj c, t_ret_ray *ret)
 		aux = op_minus(c.pos, ret->p);
 		ret->n = cross(aux, c.orientation);
 		ret->n = cross(ret->n, c.orientation);
+		if (op_dot(ret->n, d.d) > 0)
+			invert_vector(&ret->n);
 		normalize(&ret->n);
 		return (TRUE);
 	}

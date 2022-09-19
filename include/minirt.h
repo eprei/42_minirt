@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/19 16:11:50 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:04:04 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@
 # define SPHERE 3
 # define PLAN 4
 # define CYLINDER 5
-# define WIDTH 1024
-# define HEIGHT 1024
-# define MY_PI 3.1415
+# define WIDTH 512
+# define HEIGHT 512
 # define ESC_KEY 53
 # define FALSE 0
 # define TRUE 1
@@ -190,7 +189,7 @@ void		calcule_caps(t_vector *cyl_top_center, t_vector *cyl_bottom_center, \
 t_obj *cylinder_cap, t_obj c);
 int			verif_inside_cylindre_cap(t_ret_ray ret_local, \
 t_obj c, t_obj cylinder_cap);
-int			verif_inside_cylindre_body(const t_obj c, t_ret_ray *ret);
+int			verif_inside_cylindre_body(t_ray d, const t_obj c, t_ret_ray *ret);
 void		tab_free_full(char ***tab);
 void		update_ret(int *res, t_ret_ray *ret, \
 t_obj current, t_ret_ray loc_ret);
