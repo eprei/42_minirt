@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/14 14:07:59 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/19 11:33:18 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,54 @@ int	inter_plane(const t_ray d, const t_obj plane, t_ret_ray *ret)
 		{
 			ret->t = t;
 			ret->p = op_plus(d.o, op_mult(ret->t, d.d));
-			ret->n = op_minus(ret->p, plane.pos);
-			return (1);
+			ret->n = plane.orientation;
+			return (TRUE);
 		}
 	}
-	return (0);
+	return (FALSE);
+}
+
+int	verif_inside_cylindre_body(const t_obj c, t_ret_ray *ret)
+{
+	float		hit_point_to_cyl_center;
+	float		cyl_center_to_high_of_hit_point;
+	t_vector	aux;
+
+	hit_point_to_cyl_center = distance_between_two_vectors(c.pos, ret->p);
+	cyl_center_to_high_of_hit_point = hit_point_to_cyl_center * \
+	hit_point_to_cyl_center - c.diameter * c.diameter;
+	if (cyl_center_to_high_of_hit_point <= (c.height / 2) * (c.height / 2))
+	{
+		aux = op_minus(c.pos, ret->p);
+		ret->n = cross(aux, c.orientation);
+		ret->n = cross(ret->n, c.orientation);
+		normalize(&ret->n);
+		return (TRUE);
+	}
+	else
+		return (FALSE);
+}
+
+int	verif_inside_cylindre_cap(t_ret_ray ret_local, t_obj c, t_obj cylinder_cap)
+{
+	float	distance_to_cap_center;
+
+	distance_to_cap_center = distance_between_two_vectors(ret_local.p, \
+	cylinder_cap.pos);
+	if (distance_to_cap_center <= c.diameter)
+		return (TRUE);
+	else
+		return (FALSE);
+}
+
+void	calcule_caps(t_vector *cyl_top_center, t_vector *cyl_bottom_center, \
+t_obj *cylinder_cap, t_obj c)
+{
+	normalize(&c.orientation);
+	*cyl_top_center = op_mult(c.height * 0.5, c.orientation);
+	*cyl_top_center = op_plus(*cyl_top_center, c.pos);
+	*cyl_bottom_center = op_mult(c.height * -0.5, c.orientation);
+	*cyl_bottom_center = op_plus(*cyl_bottom_center, c.pos);
+	cylinder_cap->pos = *cyl_top_center;
+	cylinder_cap->orientation = c.orientation;
 }

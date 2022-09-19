@@ -3,15 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:25:31 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/13 10:20:33 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/19 11:39:51 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
-#include <stdio.h>
+
+void	update_ret(int *res, t_ret_ray *ret, t_obj current, t_ret_ray loc_ret)
+{
+	*res = 1;
+	if (loc_ret.t < ret->t)
+	{
+		ret->p = loc_ret.p;
+		ret->n = loc_ret.n;
+		ret->t = loc_ret.t;
+		ret->col = current.color;
+	}
+}
 
 int	inter_obj(t_ray s_r1, t_scene *scene, t_ret_ray *ret)
 {
@@ -26,34 +37,15 @@ int	inter_obj(t_ray s_r1, t_scene *scene, t_ret_ray *ret)
 		current = scene->obj_0;
 		while (current != NULL)
 		{
-			if (current->type == SPHERE)
-			{
-				if (inter_sphere(s_r1, *current, &loc_ret))
-				{
-					res = 1;
-					if (loc_ret.t < ret->t)
-					{
-						ret->p = loc_ret.p;
-						ret->n = loc_ret.n;
-						ret->t = loc_ret.t;
-						ret->col = current->color;
-					}
-				}
-			}
-			if (current->type == PLAN)
-			{
-				if (inter_plane(s_r1, *current, &loc_ret))
-				{
-					res = 1;
-					if (loc_ret.t < ret->t)
-					{
-						ret->p = loc_ret.p;
-						ret->n = loc_ret.n;
-						ret->t = loc_ret.t;
-						ret->col = current->color;
-					}
-				}
-			}
+			if (current->type == SPHERE && \
+			inter_sphere(s_r1, *current, &loc_ret))
+				update_ret(&res, ret, *current, loc_ret);
+			if (current->type == PLAN && \
+			inter_plane(s_r1, *current, &loc_ret))
+				update_ret(&res, ret, *current, loc_ret);
+			if (current->type == CYLINDER && \
+			inter_cylinder(s_r1, *current, &loc_ret))
+				update_ret(&res, ret, *current, loc_ret);
 			current = current->next;
 		}
 	}

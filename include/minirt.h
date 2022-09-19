@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/15 15:12:42 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/19 11:39:51 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define HEIGHT 1024
 # define MY_PI 3.1415
 # define ESC_KEY 53
+# define FALSE 0
+# define TRUE 1
 
 typedef struct s_vector
 {
@@ -173,6 +175,22 @@ int			tablen(char **t);
 t_obj		*get_curr_cmd(t_scene *scene);
 t_obj		*create_obj(t_scene *scene);
 //temp
-void    print_tobj(t_obj *obj);
-void    print_tcam(t_cam *obj);
+void		print_tobj(t_obj *obj);
+void		print_tcam(t_cam *obj);
+int			inter_cylinder(t_ray ray, t_obj c, t_ret_ray *ret);
+float		vect_len(t_vector v);
+float		distance_between_two_vectors(t_vector a, t_vector b);
+int			inter_caps(t_ray ray, t_obj c, \
+t_ret_ray *ret_local, t_ret_ray *ret);
+void		calcule_a_b_c_delta(t_ray ray, t_inter_sp *s_inter, t_obj c);
+int			inter_obj(t_ray s_r1, t_scene *scene, t_ret_ray *ret);
+int			inter_caps(t_ray ray, t_obj c, \
+t_ret_ray *ret_local, t_ret_ray *ret);
+void		calcule_caps(t_vector *cyl_top_center, t_vector *cyl_bottom_center, \
+t_obj *cylinder_cap, t_obj c);
+int			verif_inside_cylindre_cap(t_ret_ray ret_local, \
+t_obj c, t_obj cylinder_cap);
+int			verif_inside_cylindre_body(const t_obj c, t_ret_ray *ret);
+void		tab_free_full(char ***tab);
+
 #endif
