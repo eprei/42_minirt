@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   vector_utils4.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 14:03:58 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 10:53:57 by epresa-c         ###   ########.fr       */
+/*   Created: 2022/09/02 12:18:14 by olmartin          #+#    #+#             */
+/*   Updated: 2022/09/19 16:10:58 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
 
-void	tab_free_full(char ***tab)
+void	invert_vector(t_vector *v)
 {
-	int	i;
-
-	i = 0;
-	while ((*tab)[i])
-	{
-		free((*tab)[i]);
-		(*tab)[i] = NULL;
-		i++;
-	}
-	free(*tab);
-}
-
-void	init_plane_struct(t_vector	*plane_ori_norm, \
-t_vector *plane_pos_norm, t_obj plane)
-{
-	*plane_pos_norm = plane.pos;
-	normalize(plane_pos_norm);
-	*plane_ori_norm = plane.orientation;
-	normalize(plane_ori_norm);
+	v->x = v->x * -1;
+	v->y = v->y * -1;
+	v->z = v->z * -1;
 }

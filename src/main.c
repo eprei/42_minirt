@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/20 08:58:40 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:31:39 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	parse_file(char *file, t_scene *scene)
 	scene->l_amb.type = -1;
 	scene->p_light.type = -1;
 	read_file(scene);
-	scene->h = 100;
-	scene->w = 100;
+	scene->h = WIDTH;
+	scene->w = HEIGHT;
 	return (0);
 }
 

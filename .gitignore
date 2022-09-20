@@ -6,3 +6,4 @@ src/miniRT
 src/miniRT.dSYM/
 */*.swp
 .vscode/
+miniRT.dSYM/
