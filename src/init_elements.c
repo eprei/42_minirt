@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:21:48 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 11:28:35 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:22:04 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	init_light(t_scene *scene)
 	if (!check_input_pos(scene->line[1]))
 		ft_error("Light  position not correct", scene, 5);
 	scene->p_light.pos = atod_v(scene->line[1], scene, -1E9, 1E9);
+	scene->res = NULL;
 	if (!check_input_pos(scene->line[2]))
 		ft_error("Light  ratio not correct", scene, 5);
 	scene->p_light.intensity = 1000000 * atod(scene->line[2], scene, -1, 1);

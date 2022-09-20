@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:03:58 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 10:53:57 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:19:30 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	tab_free_full(char ***tab)
 	int	i;
 
 	i = 0;
-	while ((*tab)[i])
+	while (*tab && (*tab)[i])
 	{
 		free((*tab)[i]);
 		(*tab)[i] = NULL;

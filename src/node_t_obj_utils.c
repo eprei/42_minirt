@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:34:28 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 11:28:31 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:21:35 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,15 @@ void	rt_lstclear(t_obj **objs, void (*del)(void *))
 	while (ptr != 0)
 	{
 		tmp = ptr->next;
-		del(ptr);
 		free(ptr);
+		del(ptr);
 		ptr = tmp;
 	}
 	*objs = 0;
 }
 
-void	ft_close(char *s, t_scene *scene, int level)
+void	ft_close(char *s, t_scene *scene)
 {
-	(void)s;
-	(void)level;
 	ft_printf("%s\n", s);
 	if (scene->obj_0)
 		rt_lstclear(&scene->obj_0, &del_content);
@@ -49,7 +47,7 @@ void	ft_close(char *s, t_scene *scene, int level)
 int	deal_key(int key, t_scene *scene)
 {
 	if (key == ESC_KEY)
-		ft_close("You have choosen to close the window !", scene, 10);
+		ft_close("You have choosen to close the window !", scene);
 	return (0);
 }
 
@@ -64,5 +62,5 @@ void	ft_error(char *s, t_scene *scene, int level)
 		tab_free_full(&scene->line);
 		free(scene->l);
 	}
-	ft_close(s, scene, level);
+	ft_close(s, scene);
 }

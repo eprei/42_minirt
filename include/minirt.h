@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/20 10:53:42 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:22:49 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void		init_l_amb(t_scene *scene, double intensity, t_color color);
 t_vector	cross(t_vector vect_a, t_vector vect_b);
 int			inter_plane(const t_ray d, const t_obj plane, t_ret_ray *ret);
 void		init_scene(t_scene *scene);
-void		ft_close(char *s, t_scene *scene, int level);
+void		ft_close(char *s, t_scene *scene);
 void		init_camera(t_scene *scene);
 void		init_light(t_scene *scene);
 void		init_sphere(t_scene *scene);

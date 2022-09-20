@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:17:27 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 11:29:34 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:20:28 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ int	ft_atoi_rt(char *str, t_scene *scene, double min, double max)
 		s = -1;
 		i++;
 		if (str[i] == '\0' || (str[i] < '1' || str[i] > '9'))
-			ft_close("Non-numerical character", scene, 5);
+			ft_error("Non-numerical character", scene, 6);
 	}
 	while (str[i] != '\0')
 	{
 		if (str[i] >= '0' && str[i] <= '9')
 			nb = (nb * 10) + (str[i] - '0');
 		else
-			ft_close("Non-numerical character", scene, 5);
+			ft_error("Non-numerical character", scene, 6);
 		i++;
 	}
 	if ((s * nb) > max || (s * nb) < min)
@@ -63,7 +63,7 @@ double	atod(char *l, t_scene *scene, double min, double max)
 		res += ft_atoi_rt(dec, scene, min, 1E9) / pow(10, ft_strlen(dec));
 	res = res * fac;
 	if (res < min || res > max)
-		ft_close("Value is not correct", scene, 5);
+		ft_error("Value is not correct", scene, 6);
 	return (res);
 }
 
@@ -77,7 +77,7 @@ t_color	atod_vc(char *l, t_scene *scene, double min, double max)
 	if (tablen(scene->res) != 3)
 	{
 		tab_free_full(&scene->res);
-		ft_close("Color arguments not correct", scene, 6);
+		ft_error("Color arguments not correct", scene, 5);
 	}
 	while (scene->res[i])
 	{
@@ -98,7 +98,7 @@ t_vector	atod_v(char *l, t_scene *scene, double min, double max)
 	if (tablen(scene->res) != 3)
 	{
 		tab_free_full(&scene->res);
-		ft_error("Color arguments not correct", scene, 6);
+		ft_error("Arguments number not correct", scene, 5);
 	}
 	while (scene->res[i])
 	{
