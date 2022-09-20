@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:22:34 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 10:12:17 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:12:10 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,28 @@
 void	init_a_light(t_scene *scene)
 {
 	if (scene->l_amb.type != -1)
-		ft_close("Ambiant light already configured", scene, 5);
+		ft_error("Ambiant light already configured", scene, 5);
 	if (tablen(scene->line) != 3)
-		ft_close("Ambiant light arguments not correct", scene, 5);
+		ft_error("Ambiant light arguments not correct", scene, 5);
 	scene->l_amb.type = 0;
+	scene->res = NULL;
 	if (!check_input_p_p(scene->line[1]))
-		ft_close("Ambiant light ratio not correct", scene, 5);
+		ft_error("Ambiant light ratio not correct", scene, 5);
 	scene->l_amb.intensity = atod(scene->line[1], scene, 0, 1);
 	if (!check_input_col(scene->line[2]))
-		ft_close("Ambiant light color not correct", scene, 5);
+		ft_error("Ambiant light color not correct", scene, 5);
 	scene->l_amb.color = atod_vc(scene->line[2], scene, 0, 255);
 }
 
 void	parse_elem(t_scene *scene)
 {
-	if (scene->line[0][0] == 'A')
+	if (ft_strncmp(scene->line[0], "A", 2) == 0)
 		init_a_light(scene);
-	else if (scene->line[0][0] == 'C')
+	else if (ft_strncmp(scene->line[0], "C", 2) == 0)
+	//else if (scene->line[0][0] == 'C')
 		init_camera(scene);
-	else if (scene->line[0][0] == 'L')
+	else if (ft_strncmp(scene->line[0], "L", 2) == 0)
+//	else if (scene->line[0][0] == 'L')
 		init_light(scene);
 	else if (ft_strncmp(scene->line[0], "sp", 3) == 0)
 		init_sphere(scene);
@@ -42,7 +45,7 @@ void	parse_elem(t_scene *scene)
 	else if (ft_strncmp(scene->line[0], "cy", 3) == 0)
 		init_cyl(scene);
 	else
-		ft_close("Unknown element in the file !", scene, 5);
+		ft_error("Unknown element in the file !", scene, 5);
 }
 
 void	read_file(t_scene *scene)

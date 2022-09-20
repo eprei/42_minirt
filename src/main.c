@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/20 08:58:40 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/20 11:05:13 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ int	parse_file(char *file, t_scene *scene)
 
 	a = ft_strrchr(file, '.');
 	if (a == NULL || ft_strncmp(a, ".rt", 3) != 0)
-		ft_close("Invalid mapfile extension! Mandatory: .rt", scene, 0);
+		ft_error("Invalid mapfile extension! Mandatory: .rt", scene, 0);
 	scene->fd = open(file, O_RDONLY);
 	if (scene->fd == -1)
-		ft_close("Invalid file !", scene, 0);
+		ft_error("Invalid file !", scene, 0);
 	scene->cam.fov = -1;
 	scene->l_amb.type = -1;
 	scene->p_light.type = -1;
 	read_file(scene);
-	scene->h = 100;
-	scene->w = 100;
+	scene->h = WIDTH;
+	scene->w = HEIGHT;
 	return (0);
 }
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 
 	scene.obj_0 = NULL;
 	if (argc != 2)
-		ft_close("Invalid number of arguments ! Mandatory : 1 file", &scene, 0);
+		ft_error("Invalid number of arguments ! Mandatory : 1 file", &scene, 0);
 	res = parse_file(argv[1], &scene);
 	scene.mlx_ptr = mlx_init();
 	if (scene.mlx_ptr == NULL)
