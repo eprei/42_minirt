@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:17:27 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 17:15:10 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:03:57 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,40 +69,42 @@ double	atod(char *l, t_scene *scene, double min, double max)
 
 t_color	atod_vc(char *l, t_scene *scene, double min, double max)
 {
-	char	**res;
 	int		rgb[3];
 	int		i;
 
 	i = 0;
-	res = ft_split(l, ',');
-	if (tablen(res) != 3)
-		ft_close("Color arguments not correct", scene, 5);
-	while (res[i])
+	scene->res = ft_split(l, ',');
+	if (tablen(scene->res) != 3)
 	{
-		rgb[i] = atod(res[i], scene, min, max);
+		tab_free_full(&scene->res);
+		ft_close("Color arguments not correct", scene, 5);
+	}
+	while (scene->res[i])
+	{
+		rgb[i] = atod(scene->res[i], scene, min, max);
 		i++;
 	}
-	tab_free(res);
-	free(res);
+	tab_free_full(&scene->res);
 	return (init_vec_col(rgb[0], rgb[1], rgb[2]));
 }
 
 t_vector	atod_v(char *l, t_scene *scene, double min, double max)
 {
-	char	**res;
 	double	vec[3];
 	int		i;
 
 	i = 0;
-	res = ft_split(l, ',');
-	if (tablen(res) != 3)
-		ft_close("Color arguments not correct", scene, 5);
-	while (res[i])
+	scene->res = ft_split(l, ',');
+	if (tablen(scene->res) != 3)
 	{
-		vec[i] = atod(res[i], scene, min, max);
+		tab_free_full(&scene->res);
+		ft_error("Color arguments not correct", scene, 5);
+	}
+	while (scene->res[i])
+	{
+		vec[i] = atod(scene->res[i], scene, min, max);
 		i++;
 	}
-	tab_free(res);
-	free(res);
+	tab_free_full(&scene->res);
 	return (init_vector(vec[0], vec[1], vec[2]));
 }

@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:22:34 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 17:07:43 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/20 09:58:42 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	init_a_light(t_scene *scene)
 {
 	if (scene->l_amb.type != -1)
-		ft_close("Ambiant light already configured\n", scene, 5);
+		ft_close("Ambiant light already configured", scene, 5);
 	if (tablen(scene->line) != 3)
-		ft_close("Ambiant light arguments not correct\n", scene, 5);
+		ft_close("Ambiant light arguments not correct", scene, 5);
 	scene->l_amb.type = 0;
 	if (!check_input_p_p(scene->line[1]))
-		ft_close("Ambiant light ratio not correct\n", scene, 5);
+		ft_close("Ambiant light ratio not correct", scene, 5);
 	scene->l_amb.intensity = atod(scene->line[1], scene, 0, 1);
 	if (!check_input_col(scene->line[2]))
-		ft_close("Ambiant light color not correct\n", scene, 5);
+		ft_close("Ambiant light color not correct", scene, 5);
 	scene->l_amb.color = atod_vc(scene->line[2], scene, 0, 255);
 //	print_tobj(&scene->l_amb);
 }
@@ -43,7 +43,7 @@ void	parse_elem(t_scene *scene)
 	else if (ft_strncmp(scene->line[0], "cy", 3) == 0)
 		init_cyl(scene);
 	else
-		ft_close("Unknown element in the file !\n", scene, 5);
+		ft_close("Unknown element in the file !", scene, 5);
 }
 
 void	read_file(t_scene *scene)
@@ -61,15 +61,13 @@ void	read_file(t_scene *scene)
 			scene->line = ft_split(scene->l, ' ');
 			if (scene->line)
 				parse_elem(scene);
-		//	else
-		//		ft_close("Unknown element in the file !\n", scene, 5);
 			tab_free_full(&scene->line);
 		}
 		free(scene->l);
-
 		scene->l = get_next_line(scene->fd);
 		n = ft_strlen(scene->l);
 		if (n > 0 && scene->l[n - 1] == '\n')
 			scene->l[n - 1] = '\0';
 	}
+	close(scene->fd);
 }

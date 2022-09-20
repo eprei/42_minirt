@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/19 13:24:57 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:00:27 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_scene
 	void	*win_ptr;
 	char	*l;
 	char	**line;
+	char	**res;
 	t_cam	cam;
 	t_obj	l_amb;
 	t_obj	p_light;
@@ -193,5 +194,5 @@ int			verif_inside_cylindre_body(const t_obj c, t_ret_ray *ret);
 void		tab_free_full(char ***tab);
 void		update_ret(int *res, t_ret_ray *ret, \
 t_obj current, t_ret_ray loc_ret);
-
+void		ft_error(char *s, t_scene *scene, int level);
 #endif
