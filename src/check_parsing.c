@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:46:00 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 10:59:38 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:09:45 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,4 @@ int	check_input_col(char *s)
 		i++;
 	}
 	return (1);
-}
-
-void	print_tobj(t_obj *obj)
-{
-	printf("Objet\n");
-	printf("type :%d   pos %f - %f - %f\n", obj->type, obj->pos.x, obj->pos.y, obj->pos.z);
-	printf("Orient :%f - %f - %f  color %d - %d - %d\n", obj->orientation.x, obj->orientation.y, obj->orientation.z, obj->color.r, obj->color.g, obj->color.b);
-	printf("Inten: %f Diam: %f Height: %f\n", obj->intensity, obj->diameter, obj->height);
-}
-
-void	print_tcam(t_cam *obj)
-{
-	printf("Camera\n");
-	printf("Pos %f - %f - %f\n", obj->pos.x, obj->pos.y, obj->pos.z);
-	printf("Orient :%f - %f - %f  up %f - %f - %f\n", obj->orient.x, obj->orient.y, obj->orient.z, obj->up.x, obj->up.y, obj->up.z);
-	printf("Right %f - %f - %f  FOV: %f\n", obj->right.x, obj->right.y, obj->right.z, obj->fov);
 }

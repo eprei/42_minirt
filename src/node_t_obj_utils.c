@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:34:28 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 10:05:00 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:11:57 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	del_content(void *content)
 {
 	(void)content;
-	content = 0;// a voir
+	content = 0;
 }
 
 void	rt_lstclear(t_obj **objs, void (*del)(void *))
@@ -43,8 +43,6 @@ void	ft_close(char *s, t_scene *scene, int level)
 	ft_printf("%s\n", s);
 	if (scene->obj_0)
 		rt_lstclear(&scene->obj_0, &del_content);
-//	while (1)
-//		;
 	exit (0);
 }
 

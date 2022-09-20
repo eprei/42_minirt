@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:21:48 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 08:52:47 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:10:54 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	init_camera(t_scene *scene)
 	normalize(&scene->cam.right);
 	normalize(&scene->cam.up);
 	normalize(&scene->cam.orient);
-	//print_tcam(&scene->cam);
 }
 
 void	init_light(t_scene *scene)
@@ -51,7 +50,6 @@ void	init_light(t_scene *scene)
 	if (!check_input_pos(scene->line[2]))
 		ft_close("Light  ratio not correct", scene, 5);
 	scene->p_light.intensity = 1000000 * atod(scene->line[2], scene, -1, 1);
-//	print_tobj(&scene->p_light);
 }
 
 void	init_sphere(t_scene *scene)
@@ -71,7 +69,6 @@ void	init_sphere(t_scene *scene)
 	if (!check_input_col(scene->line[3]))
 		ft_close("Sphere color not correct", scene, 5);
 	curr->color = atod_vc(scene->line[3], scene, 0, 255);
-//	print_tobj(curr);
 }
 
 void	init_plan(t_scene *scene)
@@ -91,7 +88,6 @@ void	init_plan(t_scene *scene)
 	if (!check_input_col(scene->line[3]))
 		ft_close("Plan color not correct", scene, 5);
 	curr->color = atod_vc(scene->line[3], scene, 0, 255);
-//	print_tobj(curr);
 }
 
 void	init_cyl(t_scene *scene)
@@ -117,5 +113,4 @@ void	init_cyl(t_scene *scene)
 	if (!check_input_col(scene->line[5]))
 		ft_close("Cylinder color not correct", scene, 5);
 	curr->color = atod_vc(scene->line[5], scene, 0, 255);
-//	print_tobj(curr);
 }

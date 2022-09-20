@@ -6,7 +6,7 @@
 /*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:22:34 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 09:58:42 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:12:17 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	init_a_light(t_scene *scene)
 	if (!check_input_col(scene->line[2]))
 		ft_close("Ambiant light color not correct", scene, 5);
 	scene->l_amb.color = atod_vc(scene->line[2], scene, 0, 255);
-//	print_tobj(&scene->l_amb);
 }
 
 void	parse_elem(t_scene *scene)
