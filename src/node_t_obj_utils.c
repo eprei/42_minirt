@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node_t_obj_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:34:28 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 10:11:57 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/20 11:28:31 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ void	ft_error(char *s, t_scene *scene, int level)
 {
 	ft_printf("Error\n");
 	close(scene->fd);
+	if (level > 5)
+		tab_free_full(&scene->res);
 	if (level > 4)
 	{
 		tab_free_full(&scene->line);
-		tab_free_full(&scene->res);
 		free(scene->l);
-	}	
+	}
 	ft_close(s, scene, level);
 }

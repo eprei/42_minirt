@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olmartin <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:17:27 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 10:03:57 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/20 11:29:34 by epresa-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_color	atod_vc(char *l, t_scene *scene, double min, double max)
 	if (tablen(scene->res) != 3)
 	{
 		tab_free_full(&scene->res);
-		ft_close("Color arguments not correct", scene, 5);
+		ft_close("Color arguments not correct", scene, 6);
 	}
 	while (scene->res[i])
 	{
@@ -98,7 +98,7 @@ t_vector	atod_v(char *l, t_scene *scene, double min, double max)
 	if (tablen(scene->res) != 3)
 	{
 		tab_free_full(&scene->res);
-		ft_error("Color arguments not correct", scene, 5);
+		ft_error("Color arguments not correct", scene, 6);
 	}
 	while (scene->res[i])
 	{
