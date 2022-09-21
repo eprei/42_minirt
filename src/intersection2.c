@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:09:24 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/19 17:06:05 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/21 08:35:47 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,50 @@ void	calcule_a_b_c_delta(t_ray ray, t_inter_sp *s_inter, t_obj c)
 	s_inter->delta = s_inter->b * s_inter->b - 4 * s_inter->a * s_inter->c;
 }
 
+t_obj	calcul_cyl_centers(t_vector *cyl_top_center, t_vector *cyl_bottom_center, t_obj *c)
+{
+	t_obj	cylinder_cap;
+
+	normalize(&c->orientation);
+	*cyl_top_center = op_mult(c->height * 0.5, c->orientation);
+	*cyl_top_center = op_plus(*cyl_top_center, c->pos);
+	*cyl_bottom_center = op_mult(c->height * -0.5, c->orientation);
+	*cyl_bottom_center = op_plus(*cyl_bottom_center, c->pos);
+	cylinder_cap.pos = *cyl_top_center;
+	cylinder_cap.orientation = c->orientation;
+	return (cylinder_cap);
+}
+
+void	update_ret_cyl(t_ret_ray *ret, int *intersect_status, t_ret_ray ret_local)
+{
+	*ret = ret_local;
+	*intersect_status = TRUE;
+}
+
+void	temp(t_ray ray, t_obj cylinder_cap, t_ret_ray *ret_local, t_ret_ray *ret, int *intersect_status, t_obj c, t_vector cyl_bottom_center)
+{
+	if (inter_plane(ray, cylinder_cap, ret_local) && \
+	verif_inside_cylindre_cap(*ret_local, c, cylinder_cap))
+		update_ret_cyl(ret, intersect_status,*ret_local);
+	cylinder_cap.pos = cyl_bottom_center;
+	if (inter_plane(ray, cylinder_cap, ret_local) && \
+	verif_inside_cylindre_cap(*ret_local, c, cylinder_cap) && ret_local->t < ret->t)
+		update_ret_cyl(ret, intersect_status, *ret_local);
+}
+
 int	inter_cylinder(t_ray ray, t_obj c, t_ret_ray *ret)
 {
 	t_inter_sp	s_inter;
 	t_ret_ray	ret_local;
 	int			intersect_status;
+	t_vector	cyl_top_center;
+	t_vector	cyl_bottom_center;
+	t_obj		cylinder_cap;
 
-	intersect_status = inter_caps(ray, c, &ret_local, ret);
+	ret->t = 1E9;
+	intersect_status = FALSE;
+	cylinder_cap = calcul_cyl_centers(&cyl_top_center, &cyl_bottom_center, &c);
+	temp(ray, cylinder_cap, &ret_local, ret, &intersect_status, c, cyl_bottom_center);
 	calcule_a_b_c_delta(ray, &s_inter, c);
 	if (s_inter.delta < 0)
 		return (intersect_status);

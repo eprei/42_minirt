@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/20 10:53:42 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:16:48 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define SPHERE 3
 # define PLAN 4
 # define CYLINDER 5
-# define WIDTH 512
-# define HEIGHT 512
+# define WIDTH 1024
+# define HEIGHT 1024
 # define ESC_KEY 53
 # define FALSE 0
 # define TRUE 1
