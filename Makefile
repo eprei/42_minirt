@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 10:31:46 by epresa-c          #+#    #+#              #
-#    Updated: 2022/09/20 16:18:56 by olmartin         ###   ########.fr        #
+#    Updated: 2022/09/21 10:10:09 by Emiliano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS = ./src/main.c ./src/utils.c ./src/vector_utils.c ./src/raytracing.c \
 	   ./src/intersection.c ./src/vector_utils2.c ./src/node_t_obj_create.c \
 	   ./src/node_t_obj_utils.c ./src/vector_utils3.c ./src/parsing.c \
 	   ./src/init_elements.c ./src/utils2.c ./src/check_parsing.c \
-	   ./src/utils3.c ./src/intersection2.c ./src/vector_utils4.c
+	   ./src/utils3.c ./src/intersection2.c ./src/vector_utils4.c \
+	   ./src/intersection3.c
 
 OBJ = $(SRCS:.c=.o)
 
