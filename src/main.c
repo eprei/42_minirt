@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 10:12:48 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/20 11:05:13 by epresa-c         ###   ########.fr       */
+/*   Updated: 2022/09/21 08:44:24 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	parse_file(char *file, t_scene *scene)
 	char	*a;
 
 	a = ft_strrchr(file, '.');
-	if (a == NULL || ft_strncmp(a, ".rt", 3) != 0)
+	if (a == NULL || ft_strncmp(a, ".rt", 4) != 0)
 		ft_error("Invalid mapfile extension! Mandatory: .rt", scene, 0);
 	scene->fd = open(file, O_RDONLY);
 	if (scene->fd == -1)
