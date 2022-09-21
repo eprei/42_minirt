@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:22:34 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 16:20:55 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/21 10:25:32 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ void	parse_elem(t_scene *scene)
 	if (ft_strncmp(scene->line[0], "A", 2) == 0)
 		init_a_light(scene);
 	else if (ft_strncmp(scene->line[0], "C", 2) == 0)
-	//else if (scene->line[0][0] == 'C')
 		init_camera(scene);
 	else if (ft_strncmp(scene->line[0], "L", 2) == 0)
-//	else if (scene->line[0][0] == 'L')
 		init_light(scene);
 	else if (ft_strncmp(scene->line[0], "sp", 3) == 0)
 		init_sphere(scene);

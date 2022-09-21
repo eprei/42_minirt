@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:21:48 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/20 16:22:04 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/21 10:25:06 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_light(t_scene *scene)
 		ft_error("Light  position not correct", scene, 5);
 	scene->p_light.pos = atod_v(scene->line[1], scene, -1E9, 1E9);
 	scene->res = NULL;
-	if (!check_input_pos(scene->line[2]))
+	if (!check_input_p_p(scene->line[2]))
 		ft_error("Light  ratio not correct", scene, 5);
 	scene->p_light.intensity = 1000000 * atod(scene->line[2], scene, -1, 1);
 }
@@ -59,11 +59,12 @@ void	init_sphere(t_scene *scene)
 		ft_error("Sphere arguments not correct", scene, 5);
 	curr->type = 3;
 	if (!check_input_pos(scene->line[1]))
-		ft_error("Sphere  position not correct", scene, 5);
+		ft_error("Sphere position not correct", scene, 5);
 	curr->pos = atod_v(scene->line[1], scene, -1E9, 1E9);
-	if (!check_input_pos(scene->line[2]))
-		ft_error("Sphere  ratio not correct", scene, 5);
-	curr->diameter = atod(scene->line[2], scene, -1E9, 1E9);
+	scene->res = NULL;
+	if (!check_input_p_p(scene->line[2]))
+		ft_error("Sphere radius not correct", scene, 5);
+	curr->diameter = atod(scene->line[2], scene, 0.01, 1E9);
 	if (!check_input_col(scene->line[3]))
 		ft_error("Sphere color not correct", scene, 5);
 	curr->color = atod_vc(scene->line[3], scene, 0, 255);
@@ -81,8 +82,8 @@ void	init_plan(t_scene *scene)
 		ft_error("Plan  position not correct", scene, 5);
 	curr->pos = atod_v(scene->line[1], scene, -1E9, 1E9);
 	if (!check_input_pos(scene->line[2]))
-		ft_error("Plan  ratio not correct", scene, 5);
-	curr->orientation = atod_v(scene->line[2], scene, -1E9, 1E9);
+		ft_error("Plan orientation not correct", scene, 5);
+	curr->orientation = atod_v(scene->line[2], scene, -1, 1);
 	if (!check_input_col(scene->line[3]))
 		ft_error("Plan color not correct", scene, 5);
 	curr->color = atod_vc(scene->line[3], scene, 0, 255);
@@ -97,17 +98,18 @@ void	init_cyl(t_scene *scene)
 		ft_error("Cylinder arguments not correct", scene, 5);
 	curr->type = 5;
 	if (!check_input_pos(scene->line[1]))
-		ft_error("Cylinder  position not correct", scene, 5);
+		ft_error("Cylinder position not correct", scene, 5);
 	curr->pos = atod_v(scene->line[1], scene, -1E9, 1E9);
 	if (!check_input_pos(scene->line[2]))
-		ft_error("Cylinder  ratio not correct", scene, 5);
-	curr->orientation = atod_v(scene->line[2], scene, -1E9, 1E9);
-	if (!check_input_pos(scene->line[3]))
-		ft_error("Cylinder  ratio not correct", scene, 5);
-	curr->diameter = atod(scene->line[3], scene, -1E9, 1E9);
-	if (!check_input_pos(scene->line[4]))
-		ft_error("Cylinder  ratio not correct", scene, 5);
-	curr->height = atod(scene->line[4], scene, -1E9, 1E9);
+		ft_error("Cylinder orientation not correct", scene, 5);
+	curr->orientation = atod_v(scene->line[2], scene, -1, 1);
+	scene->res = NULL;
+	if (!check_input_p_p(scene->line[3]))
+		ft_error("Cylinder diameter not correct", scene, 5);
+	curr->diameter = atod(scene->line[3], scene, 0.01, 1E9);
+	if (!check_input_p_p(scene->line[4]))
+		ft_error("Cylinder height not correct", scene, 5);
+	curr->height = atod(scene->line[4], scene, 0.01, 1E9);
 	if (!check_input_col(scene->line[5]))
 		ft_error("Cylinder color not correct", scene, 5);
 	curr->color = atod_vc(scene->line[5], scene, 0, 255);
