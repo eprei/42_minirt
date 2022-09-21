@@ -6,7 +6,7 @@
 /*   By: epresa-c <epresa-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:21:48 by olmartin          #+#    #+#             */
-/*   Updated: 2022/09/21 09:57:59 by olmartin         ###   ########.fr       */
+/*   Updated: 2022/09/21 10:05:19 by olmartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	init_cyl(t_scene *scene)
 	if (!check_input_p_p(scene->line[3]))
 		ft_error("Cylinder diameter not correct", scene, 5);
 	curr->diameter = atod(scene->line[3], scene, 0.01, 1E9);
-	if (!check_input_pos(scene->line[4]))
+	if (!check_input_p_p(scene->line[4]))
 		ft_error("Cylinder height not correct", scene, 5);
 	curr->height = atod(scene->line[4], scene, 0.01, 1E9);
 	if (!check_input_col(scene->line[5]))
