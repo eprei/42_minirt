@@ -6,7 +6,7 @@
 /*   By: Emiliano <Emiliano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 10:31:32 by epresa-c          #+#    #+#             */
-/*   Updated: 2022/09/20 16:16:48 by Emiliano         ###   ########.fr       */
+/*   Updated: 2022/09/21 09:40:10 by Emiliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ typedef struct s_obj
 	double			diameter;
 	double			height;
 	struct s_obj	*next;
+	t_vector		cyl_top_center;
+	t_vector		cyl_bottom_center;
+	struct s_obj	*cylinder_cap;
 }	t_obj;
 
 typedef struct s_scene
@@ -176,12 +179,10 @@ t_obj		*create_obj(t_scene *scene);
 int			inter_cylinder(t_ray ray, t_obj c, t_ret_ray *ret);
 float		vect_len(t_vector v);
 float		distance_between_two_vectors(t_vector a, t_vector b);
-int			inter_caps(t_ray ray, t_obj c, \
-t_ret_ray *ret_local, t_ret_ray *ret);
 void		calcule_a_b_c_delta(t_ray ray, t_inter_sp *s_inter, t_obj c);
 int			inter_obj(t_ray s_r1, t_scene *scene, t_ret_ray *ret);
-int			inter_caps(t_ray ray, t_obj c, \
-t_ret_ray *ret_local, t_ret_ray *ret);
+int			inter_caps(t_ray ray, t_ret_ray *ret_local, \
+t_ret_ray *ret, t_obj *c);
 void		calcule_caps(t_vector *cyl_top_center, t_vector *cyl_bottom_center, \
 t_obj *cylinder_cap, t_obj c);
 int			verif_inside_cylindre_cap(t_ret_ray ret_local, \
@@ -194,5 +195,6 @@ void		ft_error(char *s, t_scene *scene, int level);
 void		invert_vector(t_vector *v);
 void		init_plane_struct(t_vector	*plane_ori_norm, \
 t_vector *plane_pos_norm, t_obj plane);
+void		calcul_cyl_centers(t_obj *c);
 
 #endif
